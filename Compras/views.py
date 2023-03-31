@@ -172,4 +172,4 @@ def AddPartida(request, compra_id):
     else:
         form = CompraForm(instance=compra)
 
-    return render(request, 'home/ComprasEdit.html', {'form': form})
+    return render(request, 'home/AddPartida.html', {'form': form})

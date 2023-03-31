@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Usuarios',
     #'Casos',
     'Compras',
+    'CompraSometida',
     #'Multas'
 
 ]

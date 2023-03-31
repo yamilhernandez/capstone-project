@@ -11,6 +11,7 @@ urlpatterns = [
     path('addcompra', views.AddCompra, name='addcompra'),
     path('eliminarcompra/<compra_id>', views.EliminarCompra, name='eliminarcompra'),
     path('editarcompra/<compra_id>', views.EditarCompra, name='editarcompra'),
+    path('addpartida/<compra_id>', views.AddPartida, name='addpartida'),
     #path('testcompra', views.testCompra, name='test'),
 
 ]

@@ -79,14 +79,14 @@
             <i class="fa fa-gavel"></i>
             <p>Multas</p>
           </a>
-        </li>
+        </li>-->
         <li class="nav-item {% if 'index' in segment %} active {% endif %}">
-          <a href="/indice" aria-expanded="false">
-            <i class="fa fa-book"></i>
-            <p>Bitácoras</p>
+          <a href="{% url 'sometida' %}" aria-expanded="false">
+            <i class="fa fa-cloud"></i>
+            <p>Compras Sometidas</p>
           </a>
         </li>
-        <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+        <!--<li class="nav-item {% if 'index' in segment %} active {% endif %}">
           <a href="/usuarios" aria-expanded="false">
             <i class="fas fa-user"></i>
             <p>Usuarios</p>

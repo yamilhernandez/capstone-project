@@ -116,7 +116,7 @@ class SometidaForm(ModelForm):
                     css_class='col-md-4'
                 ),
             ),
-            Submit('submit', 'Crear Compra', css_class='button white btn-block mt-3'),
+            #Submit('submit', 'Someter Compra', css_class='button white btn-block mt-3'),
         )
 
 

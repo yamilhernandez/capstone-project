@@ -26,4 +26,19 @@ def submitted(request, compra_id):
    else:
       form = CompraForm(instance=compra)
    
-   return render(request, 'home/CompraSometida.html', {'form': form})
+   return render(request, 'home/CompraSometida.html', {'form': form}) #llama a compra sometida para realizar el submit
+
+#view similar al de compras, pero este se llama sometida view
+def sometidaView(request):
+    compras = CompraSometida.objects.order_by('id_agencia')
+    context = {'compras': compras}
+
+    return render(request, 'home/sometidaView.html', context)
+
+
+#obtiene la info y la muestra en el web, se elimino el boton de submit. 
+def detailedView(request, compra_id):
+    sometido = CompraSometida.objects.get(compra_id = compra_id)
+    form = SometidaForm(instance=sometido)
+
+    return render (request, 'home/CompraSometida.html', {'form': form})

@@ -162,13 +162,12 @@ def EliminarCompra(request, compra_id):
 #intento de a~adir partida
 def AddPartida(request, compra_id):
     compra = Compra.objects.get(compra_id = compra_id)
-    form = CompraForm(instance=compra)
 
     if request.method == 'POST':
-        form = CompraForm(request.POST, instance=compra)
-        if form.is_valid():
-            form.save()
-            return redirect('/compras')
+        form = CompraForm(request.POST, request.FILES)
+        form.save()
+        return redirect('/compras')
+    
     else:
         form = CompraForm(instance=compra)
 

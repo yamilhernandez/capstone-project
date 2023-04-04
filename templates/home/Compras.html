@@ -63,7 +63,7 @@
                         <a  style="float: right; margin-right: 20px;" href="{% url 'addpartida' x.compra_id %}"><i class="fas fa-plus"></i></a>
                         <a  style="float: right; margin-right: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash"></i></a>
                         <a  style="float: right; margin-right: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane" data-toggle="tooltip" data-placement="top" title="Someter compra"></i></a>
                     </div>
                 </div>
             </div>

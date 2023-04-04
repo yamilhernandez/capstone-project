@@ -17,7 +17,7 @@
 
                 </div>
                 <div class="ml-md-auto py-2 py-md-0">
-                    <a href="#" class="btn btn-white btn-border btn-round mr-2">Filtro</a>
+                    {% comment %} <a href="#" class="btn btn-white btn-border btn-round mr-2">Filtro</a> {% endcomment %}
                     <a href="{% url 'addcompra' %}" class="btn btn-secondary btn-round">Añadir Compra</a>
                 </div>
             </div>
@@ -60,10 +60,10 @@
                     </div>
                     <div class="float-right pt-1">
                         <small style = "margin-right: 20px;" class="text-muted">{{x.estatus}}</small>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'addpartida' x.compra_id %}"><i class="fas fa-plus"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane" data-toggle="tooltip" data-placement="top" title="Someter compra"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'addpartida' x.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Borrar Compra"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane" data-toggle="tooltip" data-placement="top" title="Someter Compra"></i></a>
                     </div>
                 </div>
             </div>

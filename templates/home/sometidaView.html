@@ -60,7 +60,7 @@
                     </div>
                     <div class="float-right pt-1">
                         <small style = "margin-right: 20px;" class="text-muted">{{x.estatus}}</small>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'detallado' x.compra_id %}"><i class="fas fa-eye"></i></a>
+                        <a  style="float: right; margin-right: 20px;" href="{% url 'detallado' x.compra_id %}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="Ver Compra"></i></a>
                         <!--<a  style="float: right; margin-right: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash"></i></a>
                         <a  style="float: right; margin-right: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen"></i></a>
                         <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane"></i></a>-->

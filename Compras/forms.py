@@ -49,7 +49,7 @@ class CompraForm(ModelForm):
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte acrónimo de la agencia.'}),
 
             'objeto': 
-                forms.Select(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.', 'id': 'objeto'}),
 
             'comentarios': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte comentarios.'}),
@@ -61,7 +61,7 @@ class CompraForm(ModelForm):
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte numero de compra.'}),
 
             'concepto': 
-                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Concepto de compra.'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Concepto de compra.', 'id': 'concepto'}),
 
             'cantidad': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Total de Gastos'}),
@@ -70,13 +70,13 @@ class CompraForm(ModelForm):
                 forms.RadioSelect(attrs={'class': 'form-control', 'placeholder': 'Tipo de fondo.'}),
 
             'descripcion': 
-                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Ofrezca una descripcion.'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Ofrezca una descripcion.', 'id': 'descripcion'}),
 
             'id_comprador': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte  ID Comprador'}),
 
             'asignacion':  
-                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte tipo de asignacion.'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte tipo de asignacion.', 'id': 'asignacion'}),
 
             'procedencia': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte Procedencia.'}),

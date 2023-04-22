@@ -22,7 +22,7 @@
                     {% comment %} <a href="#" class="btn btn-white btn-border btn-round mr-2">Filtro</a> {% endcomment %}
                     <a href="{% url 'addcompra' %}" class="btn btn-secondary btn-round">Añadir Compra</a>
 
-                    <a href="{% url 'submit' %}" class="btn btn-secondary btn-round">Someter Lista de Compras</a>
+                    <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-round">Someter Lista de Compras</a>
 
                     <a href="#" class="btn btn-secondary btn-round">Borrar todas las Compras</a>
                 </div>
@@ -194,105 +194,72 @@
 
 {% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-<script src="/static/assets/js/setting-demo.js"></script>
-<script src="/static/assets/js/demo.js"></script>
-
 <script>
-    Circles.create({
-        id: 'circles-1',
-        radius: 45,
-        value: 60,
-        maxValue: 100,
-        width: 7,
-        text: 5,
-        colors: ['#f1f1f1', '#FF9E27'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
 
-    Circles.create({
-        id: 'circles-2',
-        radius: 45,
-        value: 70,
-        maxValue: 100,
-        width: 7,
-        text: 36,
-        colors: ['#f1f1f1', '#2BB930'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
+$(function() {
+  // Get references to the categoria and subcategoria fields
+	console.log("loaded")
+  var $objeto = $('#objeto');
+  var $descripcion = $('#descripcion');
 
-    Circles.create({
-        id: 'circles-3',
-        radius: 45,
-        value: 40,
-        maxValue: 100,
-        width: 7,
-        text: 12,
-        colors: ['#f1f1f1', '#F25961'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
+	var $asignacion = $('#asignacion');
+	var $concepto = $('#concepto');
 
-    var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
+	  var originalConceptoOptions = $concepto.html();
+		console.log(originalConceptoOptions)
+	
 
-    var mytotalIncomeChart = new Chart(totalIncomeChart, {
-        type: 'bar',
-        data: {
-            labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-            datasets: [{
-                label: "Total Income",
-                backgroundColor: '#ff9e27',
-                borderColor: 'rgb(23, 125, 255)',
-                data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                display: false,
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        display: false //this will remove only the label
-                    },
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }]
-            },
-        }
-    });
+	$asignacion.change(function() {
+		console.log('asignacion changed')
+		var selectedAsig = $asignacion.val();
+		   // Filter the subcategoria options based on the selected categoria
+    var filteredAsigOptions = '';
+		$(originalConceptoOptions).filter(function(index, option) {
+        return $(option).val()==selectedAsig;
+      }).each(function(index, option) {
+        filteredAsigOptions += $(option).prop('outerHTML');
+      });
 
-    $('#lineChart').sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: 'line',
-        height: '70',
-        width: '100%',
-        lineWidth: '2',
-        lineColor: '#ffa534',
-        fillColor: 'rgba(255, 165, 52, .14)'
-    });
+		console.log(filteredAsigOptions)
+    $concepto.html(filteredAsigOptions);
+		console.log('updated')
+
+	});
+
+
+  // Store the original subcategoria options
+  var originalDescripcionOptions = $descripcion.html();
+	console.log(originalDescripcionOptions)
+
+  // Listen for changes to the categoria field
+  $objeto.change(function() {
+		console.log('objeto changed')
+    // Get the selected value of the categoria field
+    var selectedCategoria = $objeto.val();
+		var selectedAsig = $asignacion.val();
+		console.log(`objeto: ${selectedCategoria}`)
+
+   // Filter the subcategoria options based on the selected categoria
+    var filteredDescripcionOptions = '';
+		$(originalDescripcionOptions).filter(function(index, option) {
+        return $(option).val().includes(selectedCategoria)
+      }).each(function(index, option) {
+        filteredDescripcionOptions += $(option).prop('outerHTML');
+      });
+
+			
+    
+    // Update the subcategoria options with the filtered options
+		console.log(filteredDescripcionOptions)
+    $descripcion.html(filteredDescripcionOptions);
+		console.log('updated')
+  });
+});
 </script>
+
+
+
 {% endblock javascripts %}
+

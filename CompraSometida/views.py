@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.forms.models import model_to_dict
 from Compras.models import Compra
 from Compras.forms import CompraForm,SimpleTable
 from CompraSometida.models import CompraSometida
@@ -46,41 +47,18 @@ def detailedView(request, compra_id):
 
 ############################SANDBOX para guardar y mostrar###################################
 
-def submitID(request):
-    compras = Compra.objects.all()
+def submitAll(request):
+    data = Compra.objects.all()
 
-    for compra in compras:
-        print(compra.compra_id)
-        form = SometidaForm(instance=compra)
-        if form.is_valid():
-            #form.cleaned_data()
-            form.save()
-            compra.delete()
-        
-        else:
-            print(form.errors)
+    for compra in data:
+        compra_data = model_to_dict(compra)
+        compra_data.pop('id')
+        CompraSometida.objects.create(**compra_data)
 
-    table = sometidaTable(form)
-    context = {'form': form, 'table': table}
+    Compra.objects.all().delete()
+    context = {'form': {}, 'table': data}
 
     return render(request, 'home/sometidaView.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def save_ids(compra_ids):

@@ -23,7 +23,6 @@ certifi==2022.12.7
 distlib==0.3.6
 django-tables2==2.5.3
 filelock==3.10.7
-pkg_resources==0.0.0
 platformdirs==2.6.2
 py-moneyed==2.0
 pytz==2023.3

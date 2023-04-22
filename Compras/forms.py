@@ -1,7 +1,11 @@
+#from django_tables2 import tables, TemplateColumn
+from django_tables2 import A
+import django_tables2 as tables
 from datetime import datetime
 from django import forms
 from .models import Compra
 from django.forms import ModelForm
+from django.utils.html import format_html
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row
 from crispy_forms.bootstrap import PrependedAppendedText, InlineRadios
@@ -123,3 +127,13 @@ class CompraForm(ModelForm):
 
 #autodate
 #duplicate compras 
+
+class SimpleTable(tables.Table):
+
+    #select = tables.CheckBoxColumn(accessor = A("id"))
+    Borrar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "eliminarcompra" record.compra_id %}"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Borrar Compra"></i></a>')
+    Editar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "editarcompra" record.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>')
+    Partida = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "addpartida" record.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>')
+    class Meta:
+        model = Compra
+        

@@ -2,9 +2,11 @@ from django import forms
 from .models import CompraSometida
 from django.forms import ModelForm
 from datetime import datetime
+from Compras.models import Compra
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row
 from crispy_forms.bootstrap import PrependedAppendedText, InlineRadios
+from django_tables2 import tables 
 
 class SometidaForm(ModelForm):
     class Meta:
@@ -119,7 +121,8 @@ class SometidaForm(ModelForm):
             #Submit('submit', 'Someter Compra', css_class='button white btn-block mt-3'),
         )
 
-
-
+class sometidaTable(tables.Table):
+    class Meta:
+        model = CompraSometida
 #autodate
 #duplicate compras 

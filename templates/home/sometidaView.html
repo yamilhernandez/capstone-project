@@ -6,6 +6,7 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+{% load django_tables2 %}
 
 <!DOCTYPE html>
 <div class="content">
@@ -28,7 +29,7 @@
         <div class="card full-height">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Compras</div>
+                    <div class="card-title">Compras Sometidas</div>
                     <!--<div class="card-tools">
                         <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
                             <li class="nav-item">
@@ -45,29 +46,131 @@
                             </li>
                         </ul>
                     </div>-->
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-bordered">
+                            {% render_table table %}
+                        </table>
+                    </div>
+
                 </div>
             </div>
-            {% for x in compras%}
-            <div class="card-body">
+            {% for x in compras %}
+            <!-- <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar">
-                        <span class="avatar-title rounded-circle border border-white bg-info">{{x.id_agencia|first}}</span>
+                        <span class="avatar-title rounded-circle border border-white bg-info">{{x.comprador|first}}</span>
                     </div>
                     <div class="flex-1 ml-3 pt-1">
                         <h6 class="text-uppercase fw-bold mb-1">{{x.comprador}} <span
                                 class="text-warning pl-3">{{x.num_compra}}</span></h6>
                         <span class="text-muted">{{x.asignacion}}</span>
                     </div>
-                    <div class="float-right pt-1">
-                        <small style = "margin-right: 20px;" class="text-muted">{{x.estatus}}</small>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'detallado' x.compra_id %}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="Ver Compra"></i></a>
-                        <!--<a  style="float: right; margin-right: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen"></i></a>
-                        <a  style="float: right; margin-right: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane"></i></a>-->
+                    <div class="float-leftmargin-left pt-1">
+                        <small style = "margin-left: 20px;" class="text-muted">{{x.estatus}}</small>
+                        <a  style="float: leftmargin-left; margin-left: 20px;" href="{% url 'addpartida' x.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>
+                        <a  style="float: leftmargin-left; margin-left: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Borrar Compra"></i></a>
+                        <a  style="float: leftmargin-left; margin-left: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>
+                        <a  style="float: leftmargin-left; margin-left: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane" data-toggle="tooltip" data-placement="top" title="Someter Compra"></i></a>
                     </div>
                 </div>
+            </div> --> 
+
+            <div class="table-responsive fixed-table-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <!-- <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
+                            <label class="custom-control-label" for="tableDefaultCheck1">Check 1</label>
+                        </div> -->
+    
+                        <tr>
+                            <th scope="col">Metodo</th>
+                            <th scope="col">Num Compra</th>
+                            <th scope="col">Fecha de Recibo</th>
+                            <th scope="col">Fecha de reporte</th>
+                            <th scope="col">Asig</th>
+                            <th scope="col">Objeto</th>
+                            <th scope="col">Concepto</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Procedencia</th>
+                            <th scope="col">Num Licitador</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Cuenta</th>
+                            <th scope="col">Fondos</th>
+                            <th scope="col">Comprador</th>
+                            <th scope="col">Comentarios</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr>
+                            <td style ="word-break:break-all;">
+                                {{x.metodo}}
+                            </td>    
+                            <td>
+                                {{x.num_compra}}
+                            </td>
+                            <td>
+                                {{x.fecha_recibo}}
+                            </td>
+                            <td>
+                                {{x.fecha_reporte}}
+                            </td>
+                            <td>
+                                {{x.asignacion}}
+                            </td>    
+                            <td>
+                                {{x.objeto}}
+                            </td>
+                            <td>
+                                {{x.concepto}}
+                            </td>  
+                            <td>
+                                {{x.descripcion}}
+                            </td>    
+                            <td>
+                                {{x.procedencia}}
+                            </td> 
+                            <td>
+                                {{x.num_licitador}}
+                            </td>
+                            <td>
+                                {{x.cantidad}}
+                            </td>
+                            <td>
+                                {{x.proveedor}}
+                            </td>
+                            <td>
+                                {{x.cuenta}}
+                            </td>
+                            <td>
+                                {{x.fondos}}
+                            </td>
+                            <td>
+                                {{x.comprador}}
+                            </td>
+                            <td>
+                                {{x.comentarios}}
+                            </td>
+                            
+                        </tr>
+                            <!-- <a  class="btn btn-primary" href="#" role="button">Anadir Partida</a>
+                            <a  class="btn btn-primary" href="#" role="button">Borra Compra</a>
+                            <a  class="btn btn-primary" href="#" role="button">Editar Compra</a>
+                            <a  class="btn btn-primary" href="#" role="button">Someter Compra</a> -->
+                            
+                                <!-- <a  style="float: left; margin-left: 20px;" href="{% url 'addpartida' x.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>
+                                <a  style="float: left; margin-left: 20px;" href="{% url 'eliminarcompra' x.compra_id %}"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Borrar Compra"></i></a>
+                                <a  style="float: left; margin-left: 20px;" href="{% url 'editarcompra' x.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a> -->
+                                <!-- <a  style="float: left; margin-left: 20px;" href="{% url 'sometido' x.compra_id %}"><i class="fas fa-paper-plane" data-toggle="tooltip" data-placement="top" title="Someter Compra"></i></a> -->
+                                <a  style="float: left; margin-left: 20px;" href="{% url 'detallado' x.compra_id %}"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="Ver Compra"></i></a>
+                            
+                    </tbody>
+                </table>
             </div>
-            {%endfor%}
+
+            {% endfor %}
         </div>
     </div>
 </div>

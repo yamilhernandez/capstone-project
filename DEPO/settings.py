@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     #'Casos',
     'Compras',
     'CompraSometida',
+    "django_tables2"
     #'Multas'
 
 ]
@@ -159,3 +160,5 @@ AUTH_USER_MODEL = 'Usuarios.Usuario'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"

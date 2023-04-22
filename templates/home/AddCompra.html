@@ -23,7 +23,8 @@
 					<h1 class="mt-5" style="color: white">Crear Compra</h1>
 				</div>
 				<div id="custom-html-1n"></div>
-
+<!---->				
+<!---->
 				{% if submitted %}
 				<div
 					class="text-center mx-0 mx-sm-5 pt-2 mb-2"
@@ -55,14 +56,15 @@
 				</div>
 			</div>
 			{% else %} 
-				{% load crispy_forms_tags %}
-				{% crispy form %}
 
-				
-				
+				{% load crispy_forms_tags %}
+				{% crispy form %} 
+
 			{% endif %}
 		</div>
 	</div>
 
 	{% endblock content %}
 </div>
+
+

@@ -1,8 +1,9 @@
 # Create your views here.
+import django_tables2 as tables
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Compra
-from .forms import CompraForm
+from .forms import CompraForm, SimpleTable
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -32,20 +33,32 @@ def AddCompra(request):
         mensaje = ("Se creo la compra") #mensaje para indicar que se cero la compra
         messages.success(request, mensaje)
         submitted = True
-        return render(request, 'home/AddCompra.html', {'form': form, 'submitted': submitted})
+        return render(request, 'home/Compras.html', {'form': form, 'submitted': submitted})
 
     else:
         form = CompraForm()
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'home/AddCompra.html', {'form': form, 'submitted': submitted})
+    return render(request, 'home/Compras.html', {'form': form, 'submitted': submitted})
 
-############################################################
+
+
+
+
+###########################muestra el form junto con la tabla #################################
 def ComprasView(request):
-    compras = Compra.objects.order_by('id_agencia')
-    context = {'compras': compras}
 
+    if request.method == "POST":
+        form = CompraForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+
+    comp = Compra.objects.all()
+    table = SimpleTable(comp)
+    form = CompraForm()
+    context = {'form': form, 'table' : table}
     return render(request, 'home/Compras.html', context)
 
 #permite editar la compra, los campos connectados no aplican para client
@@ -172,3 +185,26 @@ def AddPartida(request, compra_id):
         form = CompraForm(instance=compra)
 
     return render(request, 'home/AddPartida.html', {'form': form})
+
+
+
+
+
+                                ################SANDBOX#############################################
+
+
+
+
+""" def listView(request, compra_id):
+    compra = Compra.objects.get(Compra, compra_id = compra_id)
+    form = CompraForm(instance=compra)
+
+    if request.method == 'POST':
+        form = CompraForm(request.POST, instance=compra)
+        if form.is_valid():
+            form.save()
+            return redirect('/compras')
+    else:
+        return render(request, 'home/Compras.html', {'form': form}) """
+
+   

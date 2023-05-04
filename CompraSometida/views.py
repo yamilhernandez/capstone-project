@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from Compras.forms import SimpleTable
 import django_tables2 as tables
 from django_tables2 import RequestConfig
+from django.core.paginator import Paginator
 from datetime import date
 # Create your views here.
 # Create your views here.
@@ -30,14 +31,13 @@ def submitted(request):
 
 #view similar al de compras, pero este se llama sometida view
 def sometidaView(request):
-    comp = CompraSometida.objects.all()
-    table = sometidaTable(comp)
-    form = SometidaForm()
-    context = {'form': form, 'table' : table}
+    table = sometidaTable(CompraSometida.objects.all())
+    table.paginate(page=request.GET.get("page", 1), per_page= 5)
+    context = {'table' : table}
     return render(request, 'home/sometidaView.html', context)
 
 
-#obtiene la info y la muestra en el web, se elimino el boton de submit. 
+#obtiene la info y la muestra en el web, se elimino el boton de submit. BORRAR
 def detailedView(request, compra_id):
     sometido = CompraSometida.objects.get(compra_id = compra_id)
     form = SometidaForm(instance=sometido)
@@ -60,7 +60,15 @@ def submitAll(request):
 
     return render(request, 'home/sometidaView.html', context)
 
+####################sandbox para eliminar todas############################################
+def deleteAll(request):
+    data = Compra.objects.all()
 
+    Compra.objects.all().delete()
+    context = {'form': {}, 'table': data}
+    return redirect('/compras')
+
+############################################################################################ BORRAR
 def save_ids(compra_ids):
     for compra_id in compra_ids:
         compra_sometida = CompraSometida(id=compra_id)

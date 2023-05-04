@@ -130,10 +130,15 @@ class CompraForm(ModelForm):
 
 class SimpleTable(tables.Table):
 
-    #select = tables.CheckBoxColumn(accessor = A("id"))
-    Borrar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "eliminarcompra" record.compra_id %}"><i class="fas fa-trash" data-toggle="tooltip" data-placement="top" title="Borrar Compra"></i></a>')
-    Editar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "editarcompra" record.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>')
-    Partida = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "addpartida" record.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>')
+    selection = tables.CheckBoxColumn(accessor = 'id', orderable = False)
+    """ Editar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "editarcompra" record.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>')#
+    Partida = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "addpartida" record.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>')#SE PUEDEN BORRA TAMBIEN """
+    
+    def render_selection(self, record):
+        return format_html('<input type="checkbox" name="selection" value="{}"/>', record.id)
+    
     class Meta:
         model = Compra
-        
+        fields = ['selection','id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+                  'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']

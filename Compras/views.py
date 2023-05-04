@@ -1,8 +1,10 @@
 # Create your views here.
 import django_tables2 as tables
-from django.shortcuts import render
+from django.forms.models import model_to_dict
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Compra
+from django_tables2 import RequestConfig
 from .forms import CompraForm, SimpleTable
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -10,7 +12,6 @@ from django.shortcuts import redirect
 
 from datetime import date
 # Create your views here.
-#verifico github
 Compras = []
 
 #aqui esta funcion permite a~adir la compra
@@ -55,95 +56,14 @@ def ComprasView(request):
         if form.is_valid():
             form.save()
 
-    comp = Compra.objects.all()
-    table = SimpleTable(comp)
     form = CompraForm()
+    table = SimpleTable(Compra.objects.all())
+    table.paginate(page=request.GET.get("page", 1), per_page= 5)
     context = {'form': form, 'table' : table}
     return render(request, 'home/Compras.html', context)
 
-#permite editar la compra, los campos connectados no aplican para client
+#permite editar la compra, los campos connectados no aplican para client BORRAR LAS CRUD ORIGINALES
 def EditarCompra(request, compra_id):
-    """submitted = False
-    if request.method == "POST":
-
-        form = CompraForm(request.POST)
-
-        id_agencia = request.POST['id_agencia']
-        metodo = request.POST['metodo']
-        objeto = request.POST['objeto']
-        num_licitador = request.POST['num_licitador']
-        comprador = request.POST['comprador']
-        num_compra = request.POST['num_compra']
-        comentarios = request.POST['comentarios']
-        concepto = request.POST['concepto']
-        cantidad = request.POST['cantidad']
-        fondos = request.POST['fondos']
-        descripcion = request.POST['descripcion']
-        id_comprador = request.POST['id_comprador']
-        #num_reporte = request.POST['num_reporte']
-        asignacion = request.POST['asignacion']
-        procedencia = request.POST['procedencia']
-        proveedor = request.POST['proveedor']
-        cuenta = request.POST['cuenta']
-        #alerta = request.POST['alerta']
-
-        # Fecha de reporte
-        
-        fecha_reporte_year = request.POST.get('fecha_reporte_year')
-        fecha_reporte_month = request.POST.get('fecha_reporte_month')
-        fecha_reporte_day = request.POST.get('fecha_reporte_day')
-
-        # Fecha adjudicacion
-        '''fecha_adjudicacion_day = request.POST.get('fecha_adjudicacion_day')
-        fecha_adjudicacion_month = request.POST.get('fecha_adjudicacion_month')
-        fecha_adjudicacion_year = request.POST.get('fecha_adjudicacion_year')'''
-
-        # Fecha reporte
-        fecha_reporte_day = request.POST.get('fecha_reporte_day')
-        fecha_reporte_month = request.POST.get('fecha_reporte_month')
-        fecha_reporte_year = request.POST.get('fecha_reporte_year')
-
-        compra = Compra.objects.get(compra_id=compra_id)
-
-        compra.id_agencia = id_agencia
-        compra.metodo = metodo
-        compra.objeto = objeto
-        compra.num_licitador = num_licitador
-        compra.comentarios = comentarios
-        compra.asignacion = asignacion
-        compra.comprador = comprador
-        compra.num_compra = num_compra
-        compra.concepto = concepto
-        compra.cantidad = cantidad
-        compra.fondos = fondos
-        compra.descripcion = descripcion
-        compra.id_comprador = id_comprador
-        #compra.num_reporte = num_reporte
-        compra.procedencia = procedencia
-        compra.proveedor = proveedor
-        compra.cuenta = cuenta
-        #compra.alerta = alerta
-
-        compra.fecha_reporte = compra.fecha_reporte.replace(day=int(
-            fecha_reporte_day), month=int(fecha_reporte_month), year=int(fecha_reporte_year))
-
-        '''compra.fecha_adjudicacion = compra.fecha_adjudicacion.replace(day=int(
-            fecha_adjudicacion_day), month=int(fecha_adjudicacion_month), year=int(fecha_adjudicacion_year))'''
-
-        compra.fecha_reporte = compra.fecha_reporte.replace(day=int(
-            fecha_reporte_day), month=int(fecha_reporte_month), year=int(fecha_reporte_year))
-
-        compra.save()
-        message = ('La compra se editó ')
-        messages.success(request, message)
-        submitted = True
-        return render(request, 'home/ComprasEdit.html', {'compra': compra, 'submitted': submitted})
-
-    else:
-        compra = Compra.objects.get(compra_id=compra_id)
-        form = CompraForm(request.POST or None, instance=compra)
-
-        return render(request, 'home/ComprasEdit.html', {'form': form, 'compra': compra, 'submitted': submitted})"""
     
     compra = Compra.objects.get(compra_id = compra_id)
     form = CompraForm(instance=compra)
@@ -190,21 +110,62 @@ def AddPartida(request, compra_id):
 
 
 
-                                ################SANDBOX#############################################
+################SANDBOX hace redirect para limpiar el form y dejarlo incialmente#############################################
 
+def clearAll(request):
+    return redirect('/compras')
 
+#####################Borrar por checkbox###########################
 
+def deleteCHK(request):
 
-""" def listView(request, compra_id):
-    compra = Compra.objects.get(Compra, compra_id = compra_id)
-    form = CompraForm(instance=compra)
+    if request.method == 'POST':
+        record_ids = request.POST.getlist('selection')
+        print(record_ids)
+        Compra.objects.filter(id__in=record_ids).delete()
+        messages.success(request, 'Selected records deleted successfully.')
+    return redirect('/compras')
+
+######################################################add partida por checkbox###########################
+
+def partidaCHK(request):
+
+    compra = Compra()
 
     if request.method == 'POST':
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
             return redirect('/compras')
-    else:
-        return render(request, 'home/Compras.html', {'form': form}) """
 
-   
+    else:
+        record_ids = request.GET.getlist('selection')
+        print(record_ids)
+        compra = Compra.objects.get(id__in=record_ids)
+        form = CompraForm(instance=compra)
+
+    return render(request, 'home/ComprasEdit.html', {'form': form})
+
+######################################################editar por checkbox#############################################
+
+def editCHK(request):
+
+    form = CompraForm()
+    compra = Compra.objects.none()
+
+    if request.method == 'POST':
+        record_ids = request.GET.getlist('selection')
+        print(record_ids)
+        compra = Compra.objects.get(id__in=record_ids)
+        form = CompraForm(request.POST, instance=compra)
+        if form.is_valid():
+            form.save()
+            return redirect('/compras')
+
+    else:
+        record_ids = request.GET.getlist('selection')
+        print(record_ids)
+        compra = Compra.objects.get(id__in=record_ids)
+        form = CompraForm(instance=compra)
+
+    return render(request, 'home/ComprasEdit.html', {'form': form})

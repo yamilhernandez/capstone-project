@@ -845,7 +845,6 @@ class CompraSometida(models.Model):
     fondos = models.CharField(max_length=1000, choices=type_founds, default=('',''), blank=False)#this
     descripcion = models.CharField(max_length=1000, choices=description, default=('',''), blank=False)
     id_comprador = models.CharField(max_length=1000, blank=False)
-    #num_reporte = models.CharField(max_length=1000, blank=False)
     asignacion = models.CharField(max_length=1000, choices=assigment, default=('',''), blank=False)
     procedencia = models.CharField(max_length=1000, blank=False)
     proveedor = models.CharField(max_length=1000, blank=False)

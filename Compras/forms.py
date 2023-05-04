@@ -79,7 +79,7 @@ class CompraForm(ModelForm):
                 forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte tipo de asignacion.', 'id': 'asignacion'}),
 
             'procedencia': 
-                forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte Procedencia.'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte Procedencia.'}),
 
             'proveedor': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte nombre proveedor.'}),
@@ -101,14 +101,15 @@ class CompraForm(ModelForm):
             Row(
                 Div(
                     'metodo', 'objeto', 'num_licitador',
-                    PrependedAppendedText('cuenta', '$', '.00'),
+                    PrependedAppendedText('cuenta', '$'),
                     'procedencia',
                     'descripcion',
                     css_class='col-md-4'
                 ),
                 Div(
                     'num_compra', 'asignacion',
-                    PrependedAppendedText('cantidad', '$', '.00'),
+
+                    PrependedAppendedText('cantidad', '$'),
                     'comentarios',
                     'id_agencia',
                      InlineRadios('fondos'),

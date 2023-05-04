@@ -1,15 +1,10 @@
 from django.db import models
 from django import forms
-# Create your models here.
-
 import uuid
 from datetime import datetime
-# Create your models here.
+from django.core.exceptions import ValidationError
 
-#agencias_nombre = ()
-#tipo_ref = (('DEL', 'Delegada'), ('EXE', 'Exenta'))
 
-#types of founds, federal o estatal dropdown
 type_founds = (
 
     ('1', 'Estatal'),
@@ -829,13 +824,19 @@ assigment=(
     ("82","82"),
     ("89","89"),
 )
+
+procedenciaOptions = (
+    ("PR","PR"),
+    ("USA","USA"),
+)
+
 class Compra(models.Model):
 
     compra_id = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
     id_agencia = models.CharField(max_length=30, blank=False)
     metodo = models.CharField(max_length=1000, choices=method_type, default=('-','-'), blank=False)
     objeto = models.CharField(max_length=30,choices=objectType, default=('-','-'), blank=False)
-    num_licitador = models.CharField(max_length=1000, blank=False)
+    num_licitador = models.CharField(max_length=4,blank=False)
     comentarios = models.CharField(max_length=1000, blank=False)
     comprador = models.CharField(max_length=1000, blank=False)
     num_compra = models.CharField(max_length=1000, blank=False)
@@ -845,13 +846,11 @@ class Compra(models.Model):
     descripcion = models.CharField(max_length=1000, choices=description, default=('',''), blank=False)
     id_comprador = models.CharField(max_length=1000, blank=False)
     asignacion = models.CharField(max_length=1000, choices=assigment, default=('',''), blank=False)
-    procedencia = models.CharField(max_length=1000, blank=False)
+    procedencia = models.CharField(max_length=1000,choices=procedenciaOptions,default=('',''),blank=False)
     proveedor = models.CharField(max_length=1000, blank=False)
     cuenta = models.CharField(max_length=255, blank=False)
     fecha_reporte = models.DateField(blank=False)
     fecha_recibo = models.DateField(blank=False)
 
     def __str__(self):
-        return self.num_compra    
-
-    #numero_compras = models.SlugField(primary_key=True, max_length=30, default='')
+        return self.num_compra

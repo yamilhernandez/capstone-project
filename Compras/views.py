@@ -49,12 +49,12 @@ def AddCompra(request):
 
 ###########################muestra el form junto con la tabla #################################
 def ComprasView(request):
-
     if request.method == "POST":
         form = CompraForm(request.POST, request.FILES)
-
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)
+            f.id_comprador = request.user.username
+            f.save()
 
     form = CompraForm()
     table = SimpleTable(Compra.objects.all())

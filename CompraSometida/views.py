@@ -36,15 +36,6 @@ def sometidaView(request):
     context = {'table' : table}
     return render(request, 'home/sometidaView.html', context)
 
-
-#obtiene la info y la muestra en el web, se elimino el boton de submit. BORRAR
-def detailedView(request, compra_id):
-    sometido = CompraSometida.objects.get(compra_id = compra_id)
-    form = SometidaForm(instance=sometido)
-
-    return render (request, 'home/CompraSometida.html', {'form': form})
-
-
 ############################SANDBOX para guardar y mostrar###################################
 
 def submitAll(request):

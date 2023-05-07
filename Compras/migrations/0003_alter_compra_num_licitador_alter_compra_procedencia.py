@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='compra',
             name='procedencia',
-            field=models.CharField(choices=[('PR', 'PR'), ('USA', 'USA')], default=('', ''), max_length=1000),
+            field=models.CharField(choices=[('PR', 'PR'), ('USA', 'USA'), ('EXT', 'EXT')], default=('', ''), max_length=1000),
         ),
     ]

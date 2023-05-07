@@ -124,22 +124,25 @@ class CompraForm(ModelForm):
             Submit('submit', 'Crear Compra', css_class='button white btn-block mt-3'),
         )
 
+################################################################## TABLE CLASS ####################################################################################
 
-
-#autodate
-#duplicate compras 
+class CheckBoxColumnWithName(tables.CheckBoxColumn):
+    @property
+    def header(self):
+        return self.verbose_name
 
 class SimpleTable(tables.Table):
 
-    selection = tables.CheckBoxColumn(accessor = 'id', orderable = False)
+    selection =  CheckBoxColumnWithName(verbose_name='Seleccione', accessor = 'id')
     """ Editar = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "editarcompra" record.compra_id %}"><i class="fas fa-pen" data-toggle="tooltip" data-placement="top" title="Editar Compra"></i></a>')#
     Partida = tables.TemplateColumn('<a  style="float: leftmargin-left; margin-left: 20px;" href="{% url "addpartida" record.compra_id %}"><i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Crear Partida"></i></a>')#SE PUEDEN BORRA TAMBIEN """
-    
-    def render_selection(self, record):
-        return format_html('<input type="checkbox" name="selection" value="{}"/>', record.id)
     
     class Meta:
         model = Compra
         fields = ['selection','id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
                   'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
+        
+        lables = {
+            'selection': 'Selection'
+        }

@@ -96,61 +96,67 @@
       <div class="col-md-6">
         <div class="card full-height">
           <div class="card-body" style="overflow: scroll; height: 17rem">
-            <div class="card-title">Estatus de las agencias</div>
-            {% for x in agencias%}
-            <div class="d-flex flex-wrap justif-content-around pb-2 pt-4">
-              <div class="px-2 pb-2 pb-md-0 text-left">
-                <span class="avatar-title rounded-circle border border-white"
-                  ><div class="">
-                    <img
-                      id="excedenteimg"
-                      alt="Imagen de Auto"
-                      src="{{x.image_agencia.url}}"
-                    /></div
-                ></span>
-              </div>
-              <div class="px-2 pb-2 pb-md-0 text-center">
-                <h5 class="h6 text-uppercase fw-bold mb-1">{{x.nombre}}</h5>
-              </div>
-              <div class="px-2 pb-2 pb-md-0 text-center">
-                <h6 class="text-warning pl-3">
-                  {%if alerta%} Cumplimiento {%else%} Incumplimiento {%endif%}
-                </h6>
-              </div>
-            </div>
-            {%endfor%}
+            <div class="card-title">Ultima Multa Recibida</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha Multa</th>
+                  <th scope="col"># Compra</th>
+                  <th scope="col"># Licitador</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023-07-23</td>
+                  <td>0257</td>
+                  <td>4547</td>
+                </tr>
+                <tr>
+                  <td>2023-05-31</td>
+                  <td>0234</td>
+                  <td>1223</td>
+                </tr>
+                <tr>
+                  <td>2023-06-21</td>
+                  <td>8975</td>
+                  <td>6764</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card full-height">
-          <div class="card-body" style="overflow: scroll; height: 17rem">
-            <div class="card-title">Casos</div>
-            {% for x in casos%}
-            <div class="d-flex flex-wrap justif-content-around pb-2 pt-4">
-              <div class="px-2 pb-2 pb-md-0 text-left">
-                <span class="avatar-title rounded-circle border border-white"
-                  ><div class="">
-                    <img
-                      id="excedenteimg"
-                      alt="Imagen de Auto"
-                      src="{{x.nombre_agencia.image_agencia.url}}"
-                    /></div
-                ></span>
-              </div>
-              <div class="px-2 pb-2 pb-md-0 text-center">
-                <h5 class="h6 text-uppercase fw-bold mb-1">
-                  {{x.id_caso}}
-                </h5>
-              </div>
-              <div class="px-2 pb-2 pb-md-0 text-center">
-                <h6 class="text-warning pl-3">
-                  {%if estatus%} Cumplimiento {%else%} Incumplimiento {%endif%}
-                </h6>
-              </div>
-            </div>
-            {%endfor%}
+          <div class="card-body" style="overflow: scroll; height: 15rem">
+            <div class="card-title">Ultima Compra Sometida</div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha Reporte</th>
+                  <th scope="col"># Compra</th>
+                  <th scope="col"># Licitador</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2023-05-23</td>
+                  <td>0257</td>
+                  <td>4547</td>
+                </tr>
+                <tr>
+                  <td>2023-05-22</td>
+                  <td>0234</td>
+                  <td>1223</td>
+                </tr>
+                <tr>
+                  <td>2023-05-21</td>
+                  <td>8975</td>
+                  <td>6764</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -201,7 +207,7 @@
               <div class="card">
                 <div class="card-header">
                   <div class="card-head-row">
-                    <div class="card-title">Método de Licitación</div>
+                    <div class="card-title">Usuarios mas comunes</div>
                     <div class="card-tools">
                       <a
                         href="#"

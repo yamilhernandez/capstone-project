@@ -9,7 +9,6 @@ from .forms import CompraForm, SimpleTable
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-
 from datetime import date
 # Create your views here.
 Compras = []
@@ -121,11 +120,17 @@ def deleteCHK(request):
 
     if request.method == 'POST':
         record_ids = request.POST.getlist('selection')
-        print(record_ids)
-        Compra.objects.filter(id__in=record_ids).delete()
-        messages.success(request, 'Selected records deleted successfully.')
-    return redirect('/compras')
+        if record_ids != []:
+            print(record_ids)
+            Compra.objects.filter(id__in=record_ids).delete()
+            messages.success(request, 'Se Borro la compra seleccionada!')
 
+    if record_ids == []:
+        messages.success(request, "Seleccione una compra bara borrar!")
+
+        
+    return redirect('/compras')
+    
 ######################################################add partida por checkbox###########################
 
 def partidaCHK(request):
@@ -136,15 +141,20 @@ def partidaCHK(request):
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
+            messages.success(request, "Partida A~nadida!")
             return redirect('/compras')
 
     else:
         record_ids = request.GET.getlist('selection')
-        print(record_ids)
-        compra = Compra.objects.get(id__in=record_ids)
-        form = CompraForm(instance=compra)
+        if record_ids == []:
+            messages.success(request, "Seleccione una compra para a~adir partida")
+            return redirect('/compras')
+        else:
+            print(record_ids)
+            compra = Compra.objects.get(id__in=record_ids)
+            form = CompraForm(instance=compra)
 
-    return render(request, 'home/ComprasEdit.html', {'form': form})
+    return render(request, 'home/ComprasEdit.html', {'form': form}) 
 
 ######################################################editar por checkbox#############################################
 
@@ -160,12 +170,18 @@ def editCHK(request):
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
+            messages.success(request, "Compra Editada!")
             return redirect('/compras')
 
     else:
         record_ids = request.GET.getlist('selection')
-        print(record_ids)
-        compra = Compra.objects.get(id__in=record_ids)
-        form = CompraForm(instance=compra)
+        if record_ids == []:
+            messages.success(request, "Seleccione una compra para Editar")
+            return redirect('/compras')
+        
+        else:
+            print(record_ids)
+            compra = Compra.objects.get(id__in=record_ids)
+            form = CompraForm(instance=compra)
 
     return render(request, 'home/ComprasEdit.html', {'form': form})

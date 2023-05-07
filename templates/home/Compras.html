@@ -10,33 +10,100 @@
 {% load crispy_forms_tags %}
 
 <!DOCTYPE html>
-<div class="content">
+  <style>
+    #excedenteimg {
+      object-fit: contain;
+      display: block;
+      max-width: 45px;
+      height: 45px;
+    }
+    .avatar-title {
+      width: 90%;
+      height: 90%;
+      background-color: white;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+    .h6 {
+      font-size: 12px;
+    }
+    .bg-primary-gradient {
+      background: #1572e8 !important;
+      background: linear-gradient(168deg, #000033, #034810) !important;
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0) !important;
+      border-color: #fbfbfb !important;
+    }
+    .rounded-circle {
+      border-radius: 100% !important;
+    }
+    .border {
+      border-width: 13px !important;
+    }
+    .pl-2,
+    .px-2 {
+      padding-right: 0.5rem !important;
+    }
+    .justif-content-around {
+      -ms-flex-pack: distribute !important;
+      justify-content: space-between;
+    }
+
+    .container{
+      text-align: center;
+    }
+
+    br {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .center {
+      margin: 0%;
+      width: 50%;
+    }
+
+    .primary-gradient {
+      background: rgba(234, 234, 98, 0.433) !important;
+    }
+
+    .letter{
+      color: #000033;
+    }
+
+  </style>
+  <div class="content">
     <div class="panel-header bg-primary-gradient">
-        <div class="page-inner py-5">
-            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-                <div>
-                    <h2 class="text-white pb-2 fw-bold">DEPO</h2>
-
-                </div>
-                <div class="ml-md-auto py-2 py-md-0">
-                    {% comment %} <a href="#" class="btn btn-white btn-border btn-round mr-2">Filtro</a>
-                    <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-round">Reset</a>
-
-                    <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-round">Someter Lista de Compras</a>
-
-                    <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-round">Borrar todas las Compras</a>
-                    {% endcomment %}
-                </div>
-            </div>
+      <div class="page-inner py-3">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <div class="container">
+            <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
+            <h3 class="text-white pb-2 fw-bold">Someter Compras</h3>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div class="col" style="padding-top: 2rem;">
+    {% for msg in messages %}
+      <br><div class="alert primary-gradient" role="alert">
+        <h4 class="container letter"><strong>{{msg}}</strong></h4>
+      </div>
+    {% endfor %}
+
+
+    <!-- <div class="col" style="padding-top: 2rem;">
         <div class="card full-height">
             <div class="card-header">
                 <div class="card-head-row">
                     <div class="card-title">Compras</div>
-                    <!--<div class="card-tools">
+                    <div class="card-tools">
                         <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab"
@@ -51,39 +118,30 @@
                                     aria-selected="false">Month</a>
                             </li>
                         </ul>
-                    </div>-->             
+                    </div>             
                 </div>
-            </div>
+            </div> -->
 
                 
                 {% crispy form %}
                 <p><br/></p>
-                <style>
-                  br {
-                    display: block;
-                    margin: 5px 0;
-                  }
-
-                  .center {
-                    margin: 0%;
-                    width: 50%;
-                  }
-                </style>
-                    <div class="btn-group center" role="group" aria-label="Basic example">
+                    <div class="container" role="group" aria-label="Basic example">
                       <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary" >Reset </a>
                       &nbsp;
                       <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary">Someter Lista de Compras </a>
                       &nbsp;
-                      <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary">Borrar todas las Compras </a>
-                      
+                      <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary">Borrar todas las Compras </a>                   
                     </div>
 
                     <form>
-                      <div class="center">
-                        <br><button formaction="{% url 'deleteCHK' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary">Borrar</button>
+                      <div class="container">
+                        <br><button formaction="{% url 'deleteCHK' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary">Borrar Compra seleccionada</button>
+                        &nbsp;
                         <button formaction="{% url 'partidaCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary">Anadir Partida</button>
-                        <button formaction="{% url 'editCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary">Editar</button>
-                        </div>
+                        &nbsp;
+                        <button formaction="{% url 'editCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary">Editar Compra Seleccionada</button>
+                      </div>
+
                       <div class="table-responsive text-nowrap">
                         <table>
                           {% csrf_token %}

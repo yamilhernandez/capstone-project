@@ -828,6 +828,7 @@ assigment=(
 procedenciaOptions = (
     ("PR","PR"),
     ("USA","USA"),
+    ("EXT", "EXT")
 )
 
 class Compra(models.Model):

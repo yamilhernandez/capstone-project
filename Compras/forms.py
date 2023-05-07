@@ -9,6 +9,8 @@ from django.utils.html import format_html
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row
 from crispy_forms.bootstrap import PrependedAppendedText, InlineRadios
+from django.core.paginator import Paginator
+
 class CompraForm(ModelForm):
 
     class Meta:
@@ -142,7 +144,4 @@ class SimpleTable(tables.Table):
         fields = ['selection','id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
                   'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
-        
-        lables = {
-            'selection': 'Selection'
-        }
+        orderable = False

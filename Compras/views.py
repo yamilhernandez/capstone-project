@@ -123,10 +123,10 @@ def deleteCHK(request):
         if record_ids != []:
             print(record_ids)
             Compra.objects.filter(id__in=record_ids).delete()
-            messages.success(request, 'Se Borro la compra seleccionada!')
+            messages.success(request, 'Se Borró la compra seleccionada!')
 
     if record_ids == []:
-        messages.success(request, "Seleccione una compra bara borrar!")
+        messages.success(request, "Seleccione una compra para borrar!")
 
         
     return redirect('/compras')
@@ -141,20 +141,20 @@ def partidaCHK(request):
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
-            messages.success(request, "Partida A~nadida!")
+            messages.success(request, "Partida Añadida!")
             return redirect('/compras')
 
     else:
         record_ids = request.GET.getlist('selection')
         if record_ids == []:
-            messages.success(request, "Seleccione una compra para a~adir partida")
+            messages.success(request, "Seleccione una compra para añadir partida")
             return redirect('/compras')
         else:
             print(record_ids)
             compra = Compra.objects.get(id__in=record_ids)
             form = CompraForm(instance=compra)
 
-    return render(request, 'home/ComprasEdit.html', {'form': form}) 
+    return render(request, 'home/AddPartida.html', {'form': form}) 
 
 ######################################################editar por checkbox#############################################
 

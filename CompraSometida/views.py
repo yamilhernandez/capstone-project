@@ -68,27 +68,27 @@ def save_ids(compra_ids):
 def Q1(request):
     compra = CompraSometida.objects.filter(fecha_reporte__range = ('2023-01-01', '2023-03-31')).values()
     table = sometidaTable(compra)
-    table.paginate(page=request.GET.get("page", 1), per_page= 5)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table' : table}
     return render(request, 'home/sometidaFiltrada.html', context)
 
 def Q2(request):
     compra = CompraSometida.objects.filter(fecha_reporte__range = ('2023-04-01', '2023-06-30')).values()
     table = sometidaTable(compra)
-    table.paginate(page=request.GET.get("page", 1), per_page= 5)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table' : table}
     return render(request, 'home/sometidaFiltradaQ2.html', context)
 
 def Q3(request):
     compra = CompraSometida.objects.filter(fecha_reporte__range = ('2023-07-01', '2023-09-30')).values()
     table = sometidaTable(compra)
-    table.paginate(page=request.GET.get("page", 1), per_page= 5)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table' : table}
     return render(request, 'home/sometidaFiltradaQ3.html', context)
 
 def Q4(request):
     compra = CompraSometida.objects.filter(fecha_reporte__range = ('2023-10-01', '2023-12-31')).values()
     table = sometidaTable(compra)
-    table.paginate(page=request.GET.get("page", 1), per_page= 5)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table' : table}
     return render(request, 'home/sometidaFiltradaQ4.html', context)

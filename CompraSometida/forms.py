@@ -125,6 +125,6 @@ class sometidaTable(tables.Table):
     class Meta:
         model = CompraSometida
         exclude = ('id', 'compra_id')
-        paginate_by = 4
+        orderable = False
 #autodate
 #duplicate compras 

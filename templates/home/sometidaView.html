@@ -37,8 +37,8 @@
       background: linear-gradient(168deg, #000033, #034810) !important;
     }
     .btn-secondary {
-      background: rgba(255, 255, 255, 0) !important;
-      border-color: #fbfbfb !important;
+      background: #FE9100 !important;
+      border-color: #000000 !important;
     }
     .rounded-circle {
       border-radius: 100% !important;
@@ -88,6 +88,14 @@
     .container{
         text-align: center;
     }
+
+    .letter{
+      color: black;
+    }
+
+    p{
+      color: black;
+    }
   </style>
   <div class="content">
     <div class="panel-header bg-primary-gradient">
@@ -102,27 +110,27 @@
     </div>
             <div class="card text-center">
                   <div class="card-body">
-                    <h5 class="card-title">Q1 Trimester</h5>
+                    <h5 class="card-title letter"><strong>Q1 Trimester</strong></h5>
                     <p class="card-text">Aqui encontraras las compras sometidas dentro del timestre de Enero a Marzo</p>
-                    <a href="{% url 'Q1' %}" class="btn btn-secondary btn-primary">Ver Compras</a>
+                    <a href="{% url 'Q1' %}" class="btn btn-secondary btn-primary letter"><strong>Ver Compras</strong></a>
                   </div>
 
                   <div class="card-body">
-                    <h5 class="card-title">Q2 Trimester</h5>
+                    <h5 class="card-title letter"><strong>Q2 Trimester</strong></h5>
                     <p class="card-text">Aqui encontraras las compras sometidas dentro del timestre de Abril a Junio</p>
-                    <a href="{% url 'Q2' %}" class="btn btn-secondary btn-primary">Ver Compras</a>
+                    <a href="{% url 'Q2' %}" class="btn btn-secondary btn-primary letter"><strong>Ver Compras</strong></a>
                   </div>
 
                   <div class="card-body">
-                    <h5 class="card-title">Q3 Trimester</h5>
+                    <h5 class="card-title letter"><strong>Q3 Trimester</strong></h5>
                     <p class="card-text">Aqui encontraras las compras sometidas dentro del timestre de Julio a Septiembre</p>
-                    <a href="{% url 'Q3' %}" class="btn btn-secondary btn-primary">Ver Compras</a>
+                    <a href="{% url 'Q3' %}" class="btn btn-secondary btn-primary letter"><strong>Ver Compras</strong></a>
                   </div>
 
                   <div class="card-body">
-                    <h5 class="card-title">Q4 Trimester</h5>
+                    <h5 class="card-title letter"><strong>Q4 Trimester</strong></h5>
                     <p class="card-text">Aqui encontraras las compras sometidas dentro del timestre de Octubre a Diciembre</p>
-                    <a href="{% url 'Q4' %}" class="btn btn-secondary btn-primary">Ver Compras</a>
+                    <a href="{% url 'Q4' %}" class="btn btn-secondary btn-primary letter"><strong>Ver Compras</strong></a>
                   </div>
 
             </div>

@@ -3,25 +3,92 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %} {% block content %}
 
+<style>
+    #excedenteimg {
+      object-fit: contain;
+      display: block;
+      max-width: 45px;
+      height: 45px;
+    }
+    .avatar-title {
+      width: 90%;
+      height: 90%;
+      background-color: white;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+    .h6 {
+      font-size: 12px;
+    }
+    .bg-primary-gradient {
+      background: #1572e8 !important;
+      background: linear-gradient(168deg, #000033, #034810) !important;
+    }
+    .btn-secondary {
+      background: #FE9100 !important;
+      border-color: #000000 !important;
+    }
+    .rounded-circle {
+      border-radius: 100% !important;
+    }
+    .border {
+      border-width: 13px !important;
+    }
+    .pl-2,
+    .px-2 {
+      padding-right: 0.5rem !important;
+    }
+    .justif-content-around {
+      -ms-flex-pack: distribute !important;
+      justify-content: space-between;
+    }
+
+    .container{
+      text-align: center;
+    }
+
+    br {
+      display: block;
+      margin: 4px 0;
+    }
+
+    .center {
+      margin: 0%;
+      width: 50%;
+    }
+
+    .primary-gradient {
+      background: rgba(234, 234, 98, 0.433) !important;
+    }
+
+    .letter{
+      color: black;
+    }
+</style>
+
 <div class="content">
-	<div class="panel-header bg-primary-gradient">
-		<div class="page-inner py-5">
-			<div
-				class="d-flex align-items-left align-items-md-center flex-column flex-md-row"
-			>
-				<div>
-					<h2 class="text-white pb-2 fw-bold">DEPO</h2>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="panel-header bg-primary-gradient">
+      <div class="page-inner py-3">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <a href="{% url 'compra' %}" class="btn btn-secondary btn-primary letter"><strong>Regresar</strong></a>
+          <div class="container">
+            <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
+            <h3 class="text-white pb-2 fw-bold">Editar Compra</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
 
 	<div role="main">
 		<div class="container-fluid mx-2">
 			<div id="custom-html-1n">
-				<div>
-					<h1 class="mt-5" style="color: white">Editar Compra</h1>
-				</div>
 				<div id="custom-html-1n"></div>
 
 				{% if submitted %}

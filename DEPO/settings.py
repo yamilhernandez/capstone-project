@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     #'Casos',
     'Compras',
     'CompraSometida',
-    "django_tables2"
-    #'Multas'
+    'django_tables2',
+    'Multas'
 
 ]
 

@@ -126,5 +126,6 @@ class sometidaTable(tables.Table):
         model = CompraSometida
         exclude = ('id', 'compra_id')
         orderable = False
+        attrs = {"class": "table table-sm table-striped"}
 #autodate
 #duplicate compras 

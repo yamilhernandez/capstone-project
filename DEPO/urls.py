@@ -13,7 +13,7 @@ urlpatterns = [
     #path('hallazgos', include('Hallazgos.urls')),
     path('compras', include('Compras.urls')),
     path('comprasometida', include('CompraSometida.urls')),
-    #path('multas', include('Multas.urls')),
+    path('multas', include('Multas.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

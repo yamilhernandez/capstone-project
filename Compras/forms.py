@@ -145,3 +145,4 @@ class SimpleTable(tables.Table):
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
                   'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
         orderable = False
+        attrs = {"class": "table table-sm table-striped"}

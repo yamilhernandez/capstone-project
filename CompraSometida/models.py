@@ -13,8 +13,8 @@ from datetime import datetime
 #types of founds, federal o estatal dropdown
 type_founds = (
 
-    ('1', 'Estatal'),
-    ('2', 'Federal')
+    ('Estatal', 'Estatal'),
+    ('Estatal', 'Federal')
 )
 method_type=(
     ('1','(CI) Compra Informal'),

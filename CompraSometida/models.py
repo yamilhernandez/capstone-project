@@ -14,7 +14,7 @@ from datetime import datetime
 type_founds = (
 
     ('Estatal', 'Estatal'),
-    ('Estatal', 'Federal')
+    ('Federal', 'Federal')
 )
 method_type=(
     ('1','(CI) Compra Informal'),
@@ -830,6 +830,13 @@ assigment=(
     ("16","82"),
     ("17","89"),
 )
+
+procedenciaOptions = (
+    ("PR","PR"),
+    ("USA","USA"),
+    ("EXT", "EXT")
+)
+
 class CompraSometida(models.Model):
     
     compra_id = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
@@ -846,7 +853,7 @@ class CompraSometida(models.Model):
     descripcion = models.CharField(max_length=1000, choices=description, default=('',''), blank=False)
     id_comprador = models.CharField(max_length=1000, blank=False)
     asignacion = models.CharField(max_length=1000, choices=assigment, default=('',''), blank=False)
-    procedencia = models.CharField(max_length=1000, blank=False)
+    procedencia = models.CharField(max_length=1000,choices=procedenciaOptions,default=('',''),blank=False)
     proveedor = models.CharField(max_length=1000, blank=False)
     cuenta = models.CharField(max_length=255, blank=False)
     fecha_reporte = models.DateField(blank=False)

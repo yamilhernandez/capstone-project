@@ -7,8 +7,8 @@ from django.core.exceptions import ValidationError
 
 type_founds = (
 
-    ('1', 'Estatal'),
-    ('2', 'Federal')
+    ('Estatal', 'Estatal'),
+    ('Federal', 'Federal')
 )
 method_type=(
     ('1','(CI) Compra Informal'),
@@ -824,6 +824,7 @@ assigment=(
     ("82","82"),
     ("89","89"),
 )
+
 
 procedenciaOptions = (
     ("PR","PR"),

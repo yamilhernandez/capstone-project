@@ -78,14 +78,23 @@
       color: black;
     }
 
+    .right{
+      text-align: right;
+    }
+
   </style>
   <div class="content">
     <div class="panel-header bg-primary-gradient">
       <div class="page-inner py-3">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-          <div class="container">
+          <div class="align-items-left">
             <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
             <h3 class="text-white pb-2 fw-bold">Someter Compras</h3>
+            <div>
+
+              <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter right"><strong>Someter Reporte</strong></a>
+
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +137,7 @@
                     <div class="container" role="group" aria-label="Basic example">
                       <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
                       &nbsp;
-                      <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Lista de Compras</strong></a>
+<!--                       <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></a> -->
                       &nbsp;
                       <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a>                   
                     </div>

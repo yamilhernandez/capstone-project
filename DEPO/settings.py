@@ -23,12 +23,15 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-k4vwk_hrj@2w9$p@cq*h=lex1i!=87opj0gzkyu#p$yg4hj-x7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
+DEBUG = False
+#ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1',
+                        'https://depocdev.azurewebsites.net', 'https://depocdev-staging.azurewebsites.net']
+
+
 
 # Application definition
 
@@ -50,21 +53,53 @@ INSTALLED_APPS = [
     'Compras',
     'CompraSometida',
     'django_tables2',
-    'Multas'
+    'Multas',
+    'storages',
 
 ]
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Delete on production.
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'simple_history.middleware.HistoryRequestMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+if DEBUG:
+
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'django.middleware.cache.UpdateCacheMiddleware',
+        'django.middleware.security.SecurityMiddleware',
+    ]
+else:
+
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'django.middleware.cache.UpdateCacheMiddleware',
+
+    ]
+
+if 'DJANGO_DB_PASSWORD' in os.environ.keys():
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'LOCATION': 'cache_table',
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
 ROOT_URLCONF = 'DEPO.urls'
 
@@ -92,12 +127,28 @@ WSGI_APPLICATION = 'DEPO.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DJANGO_DB_NAME'),
+            'USER': os.environ.get('DJANGO_DB_USER'),
+            'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD'),
+            'HOST': os.environ.get('DJANGO_DB_HOST'),
+            'PORT': os.environ.get('DJANGO_DB_PORT'),
+            'OPTIONS': {'sslmode': 'require', },
+        }
+    }
+
 
 
 # Password validation
@@ -117,6 +168,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = [
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+
+]
+
 
 
 # Internationalization
@@ -142,16 +202,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_URL = '/media/'
+#STATIC_URL = '/static/'
+#DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(CORE_DIR, 'static')
 ]
 
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -162,3 +221,19 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+
+###################AZURE#####################################
+
+DEFAULT_FILE_STORAGE = 'DEPO.az_config.AzureMediaStorage'
+STATICFILES_STORAGE = 'DEPO.az_config.AzureStaticStorage'
+
+AZURE_STORAGE_KEY = os.environ.get('AZURE_STORAGE_KEY', False)
+AZURE_ACCOUNT_NAME = "depodevstorage"
+AZURE_MEDIA_CONTAINER = os.environ.get('AZURE_MEDIA_CONTAINER', 'media')
+AZURE_STATIC_CONTAINER = os.environ.get('AZURE_STATIC_CONTAINER', 'static')
+
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.azureedge.net'  # CDN URL
+
+
+if DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

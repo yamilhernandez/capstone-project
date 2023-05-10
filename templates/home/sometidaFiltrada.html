@@ -219,5 +219,66 @@
         lineColor: '#ffa534',
         fillColor: 'rgba(255, 165, 52, .14)'
     });
-</script>
+
+    $(function() {
+      // Get references to the categoria and subcategoria fields
+      console.log("loaded")
+      var $objeto = $('#objeto');
+      var $descripcion = $('#descripcion');
+    
+      var $asignacion = $('#asignacion');
+      var $concepto = $('#concepto');
+    
+        var originalConceptoOptions = $concepto.html();
+        console.log(originalConceptoOptions)
+      
+    
+      $asignacion.change(function() {
+        console.log('asignacion changed')
+        var selectedAsig = $asignacion.val();
+          // Filter the subcategoria options based on the selected categoria
+        var filteredAsigOptions = '';
+        $(originalConceptoOptions).filter(function(index, option) {
+            return $(option).val()==selectedAsig;
+          }).each(function(index, option) {
+            filteredAsigOptions += $(option).prop('outerHTML');
+          });
+    
+        console.log(filteredAsigOptions)
+        $concepto.html(filteredAsigOptions);
+        console.log('updated')
+    
+      });
+    
+    
+      // Store the original subcategoria options
+      var originalDescripcionOptions = $descripcion.html();
+      console.log(originalDescripcionOptions)
+    
+      // Listen for changes to the categoria field
+      $objeto.change(function() {
+        console.log('objeto changed')
+        // Get the selected value of the categoria field
+        var selectedCategoria = $objeto.val();
+        var selectedAsig = $asignacion.val();
+        console.log(`objeto: ${selectedCategoria}`)
+    
+      // Filter the subcategoria options based on the selected categoria
+        var filteredDescripcionOptions = '';
+        $(originalDescripcionOptions).filter(function(index, option) {
+            return $(option).val().includes(selectedCategoria)
+          }).each(function(index, option) {
+            filteredDescripcionOptions += $(option).prop('outerHTML');
+          });
+    
+          
+        
+        // Update the subcategoria options with the filtered options
+        console.log(filteredDescripcionOptions)
+        $descripcion.html(filteredDescripcionOptions);
+        console.log('updated')
+      });
+    });
+    </script>
+
 {% endblock javascripts %}

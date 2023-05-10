@@ -7,6 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row
 from crispy_forms.bootstrap import PrependedAppendedText, InlineRadios
 from django_tables2 import tables 
+import itertools
 
 class SometidaForm(ModelForm):
     class Meta:
@@ -122,10 +123,26 @@ class SometidaForm(ModelForm):
         )
 
 class sometidaTable(tables.Table):
+
     class Meta:
         model = CompraSometida
         exclude = ('id', 'compra_id')
         orderable = False
         attrs = {"class": "table table-sm table-striped"}
+
+    def render_descripcion(self, value):
+        all_choices = CompraSometida.description
+        dictionnary = {i[0]:i[1] for i in all_choices}
+        return f"{dictionnary[value]}"
+    
+    def render_concepto(self, value):
+        all_choices = CompraSometida.descriptionAssign
+        dictionnary = {i[0]:i[1] for i in all_choices}
+        return f"{dictionnary[value]}"
+    
+    def render_metodo(self, value):
+        all_choices = CompraSometida.method_type
+        dictionnary = {i[0]:i[1] for i in all_choices}
+        return f"{dictionnary[value]}"
 #autodate
 #duplicate compras 

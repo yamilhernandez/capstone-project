@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='compra',
             name='num_licitador',
-            field=models.CharField(max_length=4),
+            field=models.CharField(max_length=10),
         ),
         migrations.AlterField(
             model_name='compra',

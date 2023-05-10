@@ -7,11 +7,11 @@ class MultaForm(ModelForm):
     class Meta:
         required_css_class = 'required'
         model = Multa
-        # 'fecha_final','oficial', 'numero_compras', 'alerta'
-        fields = ('nombre_agencia', 'total', 'infraccion', 'pago') #'num_caso'
+        #'fecha_final','oficial', 'numero_compras', 'alerta'
+        fields = ('num_caso', 'nombre_agencia', 'total', 'infraccion', 'pago') #'num_caso'
 
         labels = {
-            #'num_caso': 'ID del Caso',
+            'num_caso': 'ID del Caso',
             'nombre_agencia': 'Acrónimo de la Agencia',
 
             'total': 'Total a pagar:',
@@ -19,7 +19,7 @@ class MultaForm(ModelForm):
             'pago': 'Pago?'
         }
         widgets = {
-            #'num_caso': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte ID del caso.', 'style': 'margin-top:10px'}),
+            'num_caso': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte ID del caso.', 'style': 'margin-top:10px'}),
             'nombre_agencia': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Inserte Acrónimo de la Agencia.', 'width': '10px', 'style': 'margin-top:10px'}),
 
 

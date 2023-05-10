@@ -843,7 +843,7 @@ class CompraSometida(models.Model):
     id_agencia = models.CharField(max_length=30, blank=False)
     metodo = models.CharField(max_length=1000, choices=method_type, default=('-','-'), blank=False)
     objeto = models.CharField(max_length=30,choices=objectType, default=('-','-'), blank=False)
-    num_licitador = models.CharField(max_length=1000, blank=False)
+    num_licitador = models.CharField(max_length=10, blank=False)
     comentarios = models.CharField(max_length=1000, blank=False)
     comprador = models.CharField(max_length=1000, blank=False)
     num_compra = models.CharField(max_length=1000, blank=False)

@@ -23,7 +23,9 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-k4vwk_hrj@2w9$p@cq*h=lex1i!=87opj0gzkyu#p$yg4hj-x7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+#true local
+#false Azure testing
 #ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
 
 ALLOWED_HOSTS = ['*']
@@ -49,7 +51,7 @@ INSTALLED_APPS = [
     #'Hallazgos',
     'Landing',
     'Usuarios',
-    #'Casos',
+    'Casos',
     'Compras',
     'CompraSometida',
     'django_tables2',

@@ -16,8 +16,8 @@ class Agencia(models.Model):
 
     agencia_id = models.CharField(
         max_length=200, unique=True, default=uuid.uuid4)
-    acronimo = models.CharField(max_length=30, blank=False)
-    nombre = models.CharField(max_length=60, blank=False)
+    acronimo = models.CharField(max_length=30, blank=False, unique=True)
+    nombre = models.CharField(max_length=500, blank=False, unique=True)
     categoria = models.CharField(
         max_length=30, choices=tipo_ref, default=('', ''), blank=False)
     tipo = models.CharField(max_length=1000, default='', blank=False)
@@ -27,11 +27,7 @@ class Agencia(models.Model):
     image_agencia = models.ImageField(
         upload_to='agencia', blank=False, null=False)
 
-    alerta = models.BooleanField(
-        blank=False, default='False')
-    #history = HistoricalRecords()
-    #dropdown = models.CharField(max_length=20, choices=my_choices,default='Cumplimiento' if alerta else 'Incumplimiento')
-    #numero_compras = models.SlugField(primary_key=True, max_length=30, default='')
+    alerta = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.acronimo

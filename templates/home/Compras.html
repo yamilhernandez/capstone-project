@@ -92,9 +92,14 @@
             <h3 class="text-white pb-2 fw-bold">Someter Compras</h3>
           </div>
           <div class="container">
-            <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></a>
-            <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
-            <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a>    
+            <form>
+              {% csrf_token %}
+
+                <input class="" type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte"><br>
+                <button formaction="{% url 'submitAll' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></button>
+                <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
+                <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a> 
+            </form>   
           </div>
         </div>
       </div>

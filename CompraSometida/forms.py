@@ -15,7 +15,7 @@ class SometidaForm(ModelForm):
         model = CompraSometida
         fields = ['id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
-                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta', 'num_reporte']
 
         labels = {
             'id_agencia': 'ID Agencia',
@@ -34,10 +34,15 @@ class SometidaForm(ModelForm):
             'proveedor': 'Proveedor',
             'cuenta': 'Cuenta',
             'comprador': 'Comprador',
-            'fecha_recibo': 'Fecha Recibo'
+            'fecha_recibo': 'Fecha Recibo',
+            'num_reporte': 'Numero Reporte'
         }
         
         widgets = {
+
+            'num_reporte' : 
+                forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Numero Reporte'}),
+
             'num_licitador' : 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Inserte numero Licitador'}),
 

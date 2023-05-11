@@ -853,7 +853,6 @@ class Compra(models.Model):
     cuenta = models.CharField(max_length=255, blank=False)
     fecha_reporte = models.DateField(blank=False)
     fecha_recibo = models.DateField(blank=False)
-    num_reporte = models.CharField(max_length=500, blank=False)
 
     def __str__(self):
         return self.num_compra

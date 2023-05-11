@@ -21,6 +21,7 @@ def submitted(request):
 
    compra = Compra.objects.all()
    table = sometidaTable(compra)
+   
    if request.method == 'POST':
         form = SometidaForm(request.POST, request.FILES)
         form.save()
@@ -41,10 +42,11 @@ def sometidaView(request):
 
 def submitAll(request):
     data = Compra.objects.all()
-
+    num_reporte = request.POST.get('num_reporte')
     for compra in data:
         compra_data = model_to_dict(compra)
         compra_data.pop('id')
+        compra_data['num_reporte'] = num_reporte
         CompraSometida.objects.create(**compra_data)
 
     Compra.objects.all().delete()

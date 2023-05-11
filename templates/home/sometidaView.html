@@ -6,111 +6,167 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-{% load django_tables2 %}
-
-<!DOCTYPE html>
 <style>
-    #excedenteimg {
-      object-fit: contain;
-      display: block;
-      max-width: 45px;
-      height: 45px;
+    .adjudicar-btn {
+        background-color: #ff7500 !important;
+        border-color: #ff7500 !important;
+        color: black !important;
+        font-weight: bold;
+        border-radius: 20px;
+        padding: 10px 20px;
+        text-align: center;
+        height: 45px; /* Agregar la propiedad height y ajustar el valor según tus necesidades */
+      }
+    .btn-secondar:hover, .btn-secondar:focus, .btn-secondar:active {
+        background-color: #ff7500 !important;
+        border-color: #ff7500 !important;
+        color: black !important;
+        font-weight: bold
     }
+    
+    
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.8); /* Cambiar el valor de alpha para ajustar la opacidad */
+        border-radius: 10px; /* Ajustar el valor para cambiar el radio de la esquina */
+    }
+
+    .mi-clase:not(:last-child) {
+        border-bottom-width: 0.2px;
+        border-bottom-style: solid;
+        border-bottom-color: rgba(255, 255, 255, 0.06);
+        overflow: auto;
+        padding-bottom: 20px;
+      }
+      
+    
+    .btn {
+        padding: .65rem 1.4rem;
+        font-size: 14px;
+        opacity: 1;
+        border-radius: 20px;
+        }
+      
+
+    #excedenteimg{
+        object-fit: contain;
+        display:block;
+        max-width: 75px;
+        height: 3rem;
+    }
+
     .avatar-title {
-      width: 90%;
-      height: 90%;
-      background-color: white;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .avatar {
-      width: 5.5rem;
-      height: 5.5rem;
+        width: 5.5rem;
+        height: 5.5rem;
     }
-    .h6 {
-      font-size: 12px;
+    .h6{
+        font-size: 1rem;
     }
     .bg-primary-gradient {
-      background: #1572e8 !important;
-      background: linear-gradient(168deg, #000033, #034810) !important;
+        background: #1572E8 !important;
+        background: linear-gradient(168deg, #000033, #034810) !important;
+        }
+    .btn-secondar {
+        background: rgba(255, 255, 255, 0) !important;
+        border-color: #fbfbfb !important;
+        color: white !important;
+        font-weight: bold
     }
-    .btn-secondary {
-      background: #FE9100 !important;
-      border-color: #000000 !important;
-    }
-    .rounded-circle {
-      border-radius: 100% !important;
-    }
-    .border {
-      border-width: 13px !important;
-    }
-    .pl-2,
-    .px-2 {
-      padding-right: 0.5rem !important;
-    }
-    .justif-content-around {
-      -ms-flex-pack: distribute !important;
-      justify-content: space-between;
-    }
-    .col-md-6 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 50%;
-    }
-    .col-md-8 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 50%;
-    }
-    .col-md-4 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 50%;
-    }
-    .col-md-4 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 50%;
-    }
-    .col-md-12 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 100%;
-    }
-    .col-md-13 {
-      -ms-flex: 0 0 66.666667%;
-      flex: 0 0 66.666667%;
-      max-width: 100%;
-    }
+   
+</style>
 
-    .container{
-        text-align: center;
-    }
-
-    .letter{
-      color: black;
-    }
-  </style>
-
-    <div class="content">
-        <div class="panel-header bg-primary-gradient">
-        <div class="page-inner py-1">
+<div class="content">
+    
+    <div class=" panel-header bg-primary-gradient">
+        <div class="page-inner py-5">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-              <!-- <a href="{% url 'sometida' %}" class="btn btn-secondary btn-primary letter"><strong>Regresar</strong></a> -->
-            <div class="container">
-                <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
-                <h3 class="text-white pb-2 fw-bold">Reporte Sometido</h3>
-            </div>
+                <div>
+                    <h2 class="text-white pb-2 fw-bold">DEPO</h2>
+
+                </div>
+                
+                <div class="ml-md-auto py-2 py-md-0">
+                    <form method="GET">
+                        <div class="input-group">
+                            <div class="dropdown" color="white">
+                            </div>
+                            <div class="input-group-append ml-2">
+                            </div>
+                        </div>
+                    </form>   
+                </div>
             </div>
         </div>
     </div>
-            <div class="table-responsive text-nowrap letter">
-                <table class="table table-bordered">
-                  <strong>{% render_table table %}</strong>
-                </table>
+
+  <!--  <form method="GET">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-secondary btn-sm text-muted" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
+            <select class="form-control" name="filtro">
+                {% for x in agencias %}
+                <option value="{{ x.oficial.email }}">{{x.oficial}}</option>
+                {% endfor %}
+            </select>
+            <div class="input-group-append ml-2">
+                <a href="/agenciasAddAgencia" class="btn btn-secondary btn-round">Añadir agencia</a>
+            </div>
+        </div>
+    </form>-->
+
+    <div class="col" style="padding-top: 2rem;">
+        <div class="card full-height" style="border-radius:20px" >
+            <div class="card-header">
+                <div class="card-head-row">
+                    <div class="card-title">Compras Sometidas</div>
+                    <!--<div class="card-tools">
+                        <ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab"
+                                    aria-selected="true">Today</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week"
+                                    role="tab" aria-selected="false">Week</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab"
+                                    aria-selected="false">Month</a>
+                            </li>
+                        </ul>
+                    </div>-->
+                </div>
+            </div>
+
+            {% for id_agencia in comprasometida %}
+
+              <div class="card text-center">
+                <div class="card-header">
+                  Reporte Sometido
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{id_agencia}}</h5>
+                  <a href="#" class="btn btn-primary">Ver Reporte Detallado</a>
+                </div>
+              </div>
+
+            {%endfor%}     
+
+           
+
+
+
         </div>
     </div>
 </div>
@@ -122,163 +178,5 @@
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-<script src="/static/assets/js/setting-demo.js"></script>
-<script src="/static/assets/js/demo.js"></script>
 
-<script>
-    Circles.create({
-        id: 'circles-1',
-        radius: 45,
-        value: 60,
-        maxValue: 100,
-        width: 7,
-        text: 5,
-        colors: ['#f1f1f1', '#FF9E27'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
-
-    Circles.create({
-        id: 'circles-2',
-        radius: 45,
-        value: 70,
-        maxValue: 100,
-        width: 7,
-        text: 36,
-        colors: ['#f1f1f1', '#2BB930'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
-
-    Circles.create({
-        id: 'circles-3',
-        radius: 45,
-        value: 40,
-        maxValue: 100,
-        width: 7,
-        text: 12,
-        colors: ['#f1f1f1', '#F25961'],
-        duration: 400,
-        wrpClass: 'circles-wrp',
-        textClass: 'circles-text',
-        styleWrapper: true,
-        styleText: true
-    })
-
-    var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-    var mytotalIncomeChart = new Chart(totalIncomeChart, {
-        type: 'bar',
-        data: {
-            labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-            datasets: [{
-                label: "Total Income",
-                backgroundColor: '#ff9e27',
-                borderColor: 'rgb(23, 125, 255)',
-                data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                display: false,
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        display: false //this will remove only the label
-                    },
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }],
-                xAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        display: false
-                    }
-                }]
-            },
-        }
-    });
-
-    $('#lineChart').sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: 'line',
-        height: '70',
-        width: '100%',
-        lineWidth: '2',
-        lineColor: '#ffa534',
-        fillColor: 'rgba(255, 165, 52, .14)'
-    });
-
-    $(function() {
-      // Get references to the categoria and subcategoria fields
-      console.log("loaded")
-      var $objeto = $('#objeto');
-      var $descripcion = $('#descripcion');
-    
-      var $asignacion = $('#asignacion');
-      var $concepto = $('#concepto');
-    
-        var originalConceptoOptions = $concepto.html();
-        console.log(originalConceptoOptions)
-      
-    
-      $asignacion.change(function() {
-        console.log('asignacion changed')
-        var selectedAsig = $asignacion.val();
-          // Filter the subcategoria options based on the selected categoria
-        var filteredAsigOptions = '';
-        $(originalConceptoOptions).filter(function(index, option) {
-            return $(option).val()==selectedAsig;
-          }).each(function(index, option) {
-            filteredAsigOptions += $(option).prop('outerHTML');
-          });
-    
-        console.log(filteredAsigOptions)
-        $concepto.html(filteredAsigOptions);
-        console.log('updated')
-    
-      });
-    
-    
-      // Store the original subcategoria options
-      var originalDescripcionOptions = $descripcion.html();
-      console.log(originalDescripcionOptions)
-    
-      // Listen for changes to the categoria field
-      $objeto.change(function() {
-        console.log('objeto changed')
-        // Get the selected value of the categoria field
-        var selectedCategoria = $objeto.val();
-        var selectedAsig = $asignacion.val();
-        console.log(`objeto: ${selectedCategoria}`)
-    
-      // Filter the subcategoria options based on the selected categoria
-        var filteredDescripcionOptions = '';
-        $(originalDescripcionOptions).filter(function(index, option) {
-            return $(option).val().includes(selectedCategoria)
-          }).each(function(index, option) {
-            filteredDescripcionOptions += $(option).prop('outerHTML');
-          });
-    
-          
-        
-        // Update the subcategoria options with the filtered options
-        console.log(filteredDescripcionOptions)
-        $descripcion.html(filteredDescripcionOptions);
-        console.log('updated')
-      });
-    });
-
-</script>
 {% endblock javascripts %}

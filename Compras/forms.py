@@ -142,7 +142,7 @@ class SimpleTable(tables.Table):
     
     class Meta:
         model = Compra
-        fields = ['selection','id_agencia', 'num_reporte','metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+        fields = ['selection','id_agencia' ,'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
                   'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
         orderable = False

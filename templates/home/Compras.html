@@ -90,11 +90,11 @@
           <div class="align-items-left">
             <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
             <h3 class="text-white pb-2 fw-bold">Someter Compras</h3>
-            <div>
-
-              <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter right"><strong>Someter Reporte</strong></a>
-
-            </div>
+          </div>
+          <div class="container">
+            <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></a>
+            <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
+            <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a>    
           </div>
         </div>
       </div>
@@ -132,23 +132,27 @@
             </div> -->
 
                 <br>
-                {% crispy form %}
-                <p><br/></p>
-                    <div class="container" role="group" aria-label="Basic example">
+
+                <div class="container">
+                  {% crispy form %}
+                </div>
+                
+
+                    <!-- <div class="container" role="group" aria-label="Basic example">
                       <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
                       &nbsp;
-<!--                       <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></a> -->
+                     <a href="{% url 'submitAll' %}" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></a>
                       &nbsp;
                       <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a>                   
-                    </div>
+                    </div> -->
 
                     <form>
                       <div class="container">
-                        <br><button formaction="{% url 'deleteCHK' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Borrar Compra seleccionada</strong></button>
-                        &nbsp;
-                        <button formaction="{% url 'partidaCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter"><strong>Añadir Partida</strong></button>
-                        &nbsp;
-                        <button formaction="{% url 'editCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter"><strong>Editar Compra Seleccionada</strong></button>
+                        <br><button formaction="{% url 'deleteCHK' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter container"><strong>Borrar Compra seleccionada</strong></button>
+
+                        <br><button formaction="{% url 'partidaCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter container"><strong>Añadir Partida</strong></button>
+
+                        <br><button formaction="{% url 'editCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter container"><strong>Editar Compra Seleccionada</strong></button>
                       </div>
 
                       <div class="table-responsive text-nowrap letter">

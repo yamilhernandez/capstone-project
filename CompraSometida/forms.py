@@ -130,19 +130,19 @@ class sometidaTable(tables.Table):
         orderable = False
         attrs = {"class": "table table-sm table-striped"}
 
-    def render_descripcion(self, value):
-        all_choices = CompraSometida.description
-        dictionnary = {i[0]:i[1] for i in all_choices}
-        return f"{dictionnary[value]}"
-    
-    def render_concepto(self, value):
-        all_choices = CompraSometida.descriptionAssign
-        dictionnary = {i[0]:i[1] for i in all_choices}
-        return f"{dictionnary[value]}"
-    
-    def render_metodo(self, value):
-        all_choices = CompraSometida.method_type
-        dictionnary = {i[0]:i[1] for i in all_choices}
-        return f"{dictionnary[value]}"
+        def render_descripcion(self, value):
+            all_choices = CompraSometida.description
+            dictionnary = {i[0]:i[1] for i in all_choices}
+            return f"{dictionnary[value]}"
+        
+        def render_concepto(self, value):
+            all_choices = CompraSometida.descriptionAssign
+            dictionnary = {i[0]:i[1] for i in all_choices}
+            return f"{dictionnary[value]}"
+        
+        def render_metodo(self, value):
+            all_choices = CompraSometida.method_type
+            dictionnary = {i[0]:i[1] for i in all_choices}
+            return f"{dictionnary[value]}"
 #autodate
 #duplicate compras 

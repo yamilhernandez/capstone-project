@@ -31,7 +31,11 @@ def submitted(request):
 
 #view similar al de compras, pero este se llama sometida view
 def sometidaView(request):
-    return render(request, 'home/sometidaView.html')
+    compra = CompraSometida.objects.all()
+    table = sometidaTable(compra)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
+    context = {'table' : table}
+    return render(request, 'home/sometidaView.html', context)
 
 ############################SANDBOX para guardar y mostrar###################################
 

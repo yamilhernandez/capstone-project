@@ -842,7 +842,7 @@ class Compra(models.Model):
     comentarios = models.CharField(max_length=1000, blank=False)
     comprador = models.CharField(max_length=1000, blank=False)
     num_compra = models.CharField(max_length=1000, blank=False)
-    concepto = models.CharField(max_length=1000, choices=descriptionAssign, blank=False)
+    concepto = models.CharField(max_length=1000, choices=descriptionAssign, default=('-','-'), blank=False)
     cantidad = models.CharField(max_length=1000, blank=False)
     fondos = models.CharField(max_length=1000, choices=type_founds, default=('',''), blank=False)#this
     descripcion = models.CharField(max_length=1000, choices=description, default=('',''), blank=False)

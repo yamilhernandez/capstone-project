@@ -18,7 +18,7 @@ class CompraForm(ModelForm):
         model = Compra
         fields = ['id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
-                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta', 'num_reporte']
 
         labels = {
             'id_agencia': 'ID Agencia',
@@ -37,10 +37,15 @@ class CompraForm(ModelForm):
             'proveedor': 'Proveedor',
             'cuenta': 'Cuenta',
             'comprador': 'Comprador',
-            'fecha_recibo': 'Fecha Recibo'
+            'fecha_recibo': 'Fecha Recibo',
+            'num_reporte' : 'Numero Reporte'
         }
         
         widgets = {
+
+            'num_reporte' : 
+                forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Inserte Numero Reporte'}),
+
             'num_licitador' : 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Inserte numero Licitador'}),
 
@@ -63,7 +68,7 @@ class CompraForm(ModelForm):
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inserte numero de compra.'}),
 
             'concepto': 
-                forms.Select(attrs={'class': 'form-control', 'placeholder': 'Concepto de compra.', 'id': 'concepto'}),
+                forms.Select(attrs={'class': 'form-control', 'placeholder' : 'Concepto de compra.', 'id': 'concepto'}),
 
             'cantidad': 
                 forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Total de Gastos'}),
@@ -114,6 +119,7 @@ class CompraForm(ModelForm):
                     PrependedAppendedText('cantidad', '$'),
                     'comentarios',
                     'id_agencia',
+                    'num_reporte',
                      InlineRadios('fondos'),
                     css_class='col-md-4'
                 ),
@@ -141,7 +147,7 @@ class SimpleTable(tables.Table):
     
     class Meta:
         model = Compra
-        fields = ['selection','id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+        fields = ['selection','id_agencia', 'num_reporte','metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
                   'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
         orderable = False

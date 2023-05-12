@@ -6,6 +6,7 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+{% load django_tables2 %}
 <style>
     #excedenteimg {
       object-fit: contain;
@@ -86,6 +87,10 @@
         text-align: center;
     }
 
+    .derecha{
+      text-align: right;
+    }
+
     .letter{
       color: black;
     }
@@ -95,13 +100,22 @@
     }
   </style>
 
-<div class="content">
+<div class="content container border">
     <div class="panel-header bg-primary-gradient">
     <div class="page-inner py-1">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-        <div class="container">
+        <div class="">
             <h2 class="text-white pb-2 fw-bold">ASG DEPO</h2>
             <h3 class="text-white pb-2 fw-bold">Reportes Sometidos</h3>
+        </div>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          <div>
+            <form class="form-inline">
+              {% csrf_token %} 
+              <input type="text" name="num_reporte" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+              <button formaction="{% url 'searchBox' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Buscar</strong></button>
+              <a href="{% url 'sometida' %}" class="btn btn-secondary btn-primary letter"><strong>Ver Todas</strong></a>
+            </form>
         </div>
         </div>
     </div>
@@ -149,26 +163,39 @@
                 </div>
             </div> -->
 
+
+          
+            
+
             <div class="container">
             <br>
             {% for num_reporte, comprasometida in compras_por_reporte.items %}
               <div class="card text-center bg-primary-gradient blanco">
                 <div class="card-header">
-                  <h2>Sometido</h2> 
+                  <h2><strong>Sometido</strong></h2> 
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title blanco">Reporte No. {{num_reporte}}</h5>
+                  <h5 class="card-title blanco"><strong>Reporte No. {{num_reporte}}</strong></h5>&nbsp;<br>
                   <a href="{% url 'ComprasDetails' num_reporte%}" class="btn btn-secondary btn-primary letter"><strong>Reporte Detallado</strong> </a>
                 </div>
               </div>
 
             {%endfor%} 
+
+            {% for result in results %}
+            {% if forloop.counter == 1 %}
+              <div class="card text-center bg-primary-gradient blanco">
+                <div class="card-header">
+                  <h2><strong>Sometido</strong></h2> 
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title blanco"><strong>Reporte No. {{result.num_reporte}}</strong></h5>&nbsp;<br>
+                  <a href="{% url 'ComprasDetails' result.num_reporte%}" class="btn btn-secondary btn-primary letter"><strong>Reporte Detallado</strong> </a>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
             </div>    
-
-           
-
-
-
         </div>
     </div>
 </div>

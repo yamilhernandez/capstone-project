@@ -116,3 +116,15 @@ def Q4(request):
     table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table' : table}
     return render(request, 'home/sometidaFiltradaQ4.html', context)
+
+#####################################SEARCHBOX SANDOBOX implementation###################################################
+
+def searchBox(request):
+
+    if request.method == "POST":
+            num_reporte = request.POST.get('num_reporte', None)
+            if num_reporte:
+                results = CompraSometida.objects.filter(num_reporte__contains=num_reporte)
+                return render(request, 'home/sometidaView.html', {"results":results})
+
+    return render(request, 'home/sometidaView.html')

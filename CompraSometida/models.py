@@ -3,6 +3,9 @@ from django import forms
 import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
+from Agencias.models import Agencia
+
+from Usuarios.models import Usuario
 
 
 type_founds = (
@@ -837,7 +840,8 @@ class CompraSometida(models.Model):
     )
 
     compra_id = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
-    id_agencia = models.CharField(max_length=30, blank=False)
+    id_agencia = models.ForeignKey(Agencia, on_delete=models.CASCADE)
+    #id_agencia = models.CharField(max_length=30, blank=False)
     metodo = models.CharField(max_length=1000, choices=method_type, default=('-','-'), blank=False)
     objeto = models.CharField(max_length=30,choices=objectType, default=('-','-'), blank=False)
     num_licitador = models.CharField(max_length=10,blank=False)
@@ -848,7 +852,8 @@ class CompraSometida(models.Model):
     cantidad = models.CharField(max_length=1000, blank=False)
     fondos = models.CharField(max_length=1000, choices=type_founds, default=('',''), blank=False)#this
     descripcion = models.CharField(max_length=1000, choices=description, default=('',''), blank=False)
-    id_comprador = models.CharField(max_length=1000, blank=False)
+    id_comprador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    #id_comprador = models.CharField(max_length=1000, blank=False)
     asignacion = models.CharField(max_length=1000, choices=assigment, default=('',''), blank=False)
     procedencia = models.CharField(max_length=1000,choices=procedenciaOptions,default=('',''),blank=False)
     proveedor = models.CharField(max_length=1000, blank=False)

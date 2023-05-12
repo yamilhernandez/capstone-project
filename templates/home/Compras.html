@@ -101,7 +101,7 @@
             <form>
               {% csrf_token %}
 
-                <input type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte"><br>
+                <input required type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte"><br>
                 <button formaction="{% url 'submitAll' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></button>
                 <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a> 
             </form>   

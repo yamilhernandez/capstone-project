@@ -114,13 +114,13 @@ class CompraForm(ModelForm):
 
                     PrependedAppendedText('cantidad', '$'),
                     'comentarios',
-                    'id_agencia',
+                    #'id_agencia',
                      InlineRadios('fondos'),
                     css_class='col-md-4'
                 ),
                 Div(
                     'fecha_reporte','concepto', 'fecha_recibo', 'comprador','proveedor',
-                    'id_comprador',
+                    #'id_comprador',
                     css_class='col-md-4'
                 ),
             ),

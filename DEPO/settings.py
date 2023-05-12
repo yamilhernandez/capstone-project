@@ -226,8 +226,8 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 ###################AZURE#####################################
 
-DEFAULT_FILE_STORAGE = 'DEPO.az_config.AzureMediaStorage'
-STATICFILES_STORAGE = 'DEPO.az_config.AzureStaticStorage'
+# DEFAULT_FILE_STORAGE = 'DEPO.az_config.AzureMediaStorage'
+# STATICFILES_STORAGE = 'DEPO.az_config.AzureStaticStorage'
 
 AZURE_STORAGE_KEY = os.environ.get('AZURE_STORAGE_KEY', False)
 AZURE_ACCOUNT_NAME = "depodevstorage"

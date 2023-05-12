@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
+from Agencias.models import Agencia
 from Compras.models import Compra
 from Compras.forms import CompraForm,SimpleTable
 from CompraSometida.models import CompraSometida
@@ -32,7 +33,10 @@ def submitted(request):
 
 ###############################################view similar al de compras, pero este se llama sometida view
 def sometidaView(request):
-    comprasometida = CompraSometida.objects.values('num_reporte')
+    if request.user.is_superuser:
+        comprasometida = CompraSometida.objects.all().values('num_reporte')
+    else:
+        comprasometida = CompraSometida.objects.filter(id_comprador=request.user).values('num_reporte')
 
     compras_por_reporte = {}
     for compra in comprasometida:
@@ -40,7 +44,7 @@ def sometidaView(request):
         if num_reporte not in compras_por_reporte:
             compras_por_reporte[num_reporte] = []
         compras_por_reporte[num_reporte].extend(
-            CompraSometida.objects.filter(num_reporte=num_reporte))
+            CompraSometida.objects.filter(num_reporte=num_reporte).filter(id_comprador=request.user))
 
     context = {'compras_por_reporte': compras_por_reporte}
     return render(request, 'home/sometidaView.html', context)
@@ -48,27 +52,30 @@ def sometidaView(request):
 #####################################Detailed View##########################################
 
 def ComprasDetails(request, num_reporte):
-    compras = CompraSometida.objects.filter(num_reporte=num_reporte)
+    compras = CompraSometida.objects.filter(num_reporte=num_reporte).filter(id_comprador=request.user)
     table = sometidaTable(compras)
     table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table': table}
     return render(request, 'home/sometidaFiltrada.html', context)
 
-
-
 ############################SANDBOX para guardar y mostrar###################################
 
 def submitAll(request):
-    data = Compra.objects.all()
+    data = Compra.objects.filter(id_comprador=request.user)
     num_reporte = request.POST.get('num_reporte')
     for compra in data:
         compra_data = model_to_dict(compra)
         compra_data.pop('id')
+        compra_data.pop('id_comprador')
+        compra_data.pop('id_agencia')
         compra_data['num_reporte'] = num_reporte
-        CompraSometida.objects.create(**compra_data)
+        new_compra = CompraSometida(**compra_data)
+        new_compra.id_comprador = request.user
+        new_compra.id_agencia = Agencia.objects.filter(oficial=request.user)[0]
+        new_compra.save()
 
-    Compra.objects.all().delete()
-    sometida = CompraSometida.objects.all()
+    Compra.objects.filter(id_comprador=request.user).delete()
+    sometida = CompraSometida.objects.filter(id_comprador=request.user)
     context = {'form': {}, 'table': sometida}
     return render(request, 'home/sometidaView.html', context)
 

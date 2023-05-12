@@ -3,6 +3,8 @@ import django_tables2 as tables
 from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+
+from Agencias.models import Agencia
 from .models import Compra
 from django_tables2 import RequestConfig
 from .forms import CompraForm, SimpleTable
@@ -49,14 +51,21 @@ def AddCompra(request):
 ###########################muestra el form junto con la tabla #################################
 def ComprasView(request):
     if request.method == "POST":
-        form = CompraForm(request.POST, request.FILES)
+        data =  request.POST
+        data._mutable = True
+        data['id_comprador'] = request.user
+        data['id_agencia'] = Agencia.objects.filter(oficial=request.user)[0]
+        data._mutable = False
+        form = CompraForm(data, request.FILES)
         if form.is_valid():
-            f = form.save(commit=False)
-            f.id_comprador = request.user.username
-            f.save()
+
+            form.save()
 
     form = CompraForm()
-    table = SimpleTable(Compra.objects.all())
+    if request.user.is_superuser:
+        table = SimpleTable(Compra.objects.all())
+    else:
+        table = SimpleTable(Compra.objects.filter(id_comprador=request.user))
     table.paginate(page=request.GET.get("page", 1), per_page= 5)
     context = {'form': form, 'table' : table}
     return render(request, 'home/Compras.html', context)

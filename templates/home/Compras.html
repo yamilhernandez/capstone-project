@@ -101,7 +101,7 @@
           <div class="container">
             <form class="form-inline">
               {% csrf_token %}
-                &nbsp;<input type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte" class="form-control mr-sm-2" aria-label="Numero de Reporte"><br>
+                &nbsp;<input required type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte" class="form-control mr-sm-2" aria-label="Numero de Reporte"><br>
                 &nbsp;<button formaction="{% url 'submitAll' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></button>
                 &nbsp;<a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a> 
             </form>   

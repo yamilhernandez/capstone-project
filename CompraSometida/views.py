@@ -30,11 +30,31 @@ def submitted(request):
    
    return render(request, 'home/CompraSometida.html', {'form': form, 'table': table}) #llama a compra sometida para realizar el submit """
 
-#view similar al de compras, pero este se llama sometida view
+###############################################view similar al de compras, pero este se llama sometida view
 def sometidaView(request):
-    comprasometida = CompraSometida.objects.all()
-    context = {'comprasometida' : comprasometida}
+    comprasometida = CompraSometida.objects.values('num_reporte')
+
+    compras_por_reporte = {}
+    for compra in comprasometida:
+        num_reporte = compra['num_reporte']
+        if num_reporte not in compras_por_reporte:
+            compras_por_reporte[num_reporte] = []
+        compras_por_reporte[num_reporte].extend(
+            CompraSometida.objects.filter(num_reporte=num_reporte))
+
+    context = {'compras_por_reporte': compras_por_reporte}
     return render(request, 'home/sometidaView.html', context)
+
+#####################################Detailed View##########################################
+
+def ComprasDetails(request, num_reporte):
+    compras = CompraSometida.objects.filter(num_reporte=num_reporte)
+    table = sometidaTable(compras)
+    table.paginate(page=request.GET.get("page", 1), per_page= 8)
+    context = {'table': table}
+    return render(request, 'home/sometidaFiltrada.html', context)
+
+
 
 ############################SANDBOX para guardar y mostrar###################################
 
@@ -48,8 +68,8 @@ def submitAll(request):
         CompraSometida.objects.create(**compra_data)
 
     Compra.objects.all().delete()
-    context = {'form': {}, 'table': data}
-
+    sometida = CompraSometida.objects.all()
+    context = {'form': {}, 'table': sometida}
     return render(request, 'home/sometidaView.html', context)
 
 ####################sandbox para eliminar todas############################################

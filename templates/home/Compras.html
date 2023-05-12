@@ -82,6 +82,12 @@
       text-align: right;
     }
 
+    fieldset > input{
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+
   </style>
   <div class="content">
     <div class="panel-header bg-primary-gradient">
@@ -95,10 +101,9 @@
             <form>
               {% csrf_token %}
 
-                <input class="" type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte"><br>
+                <input type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte"><br>
                 <button formaction="{% url 'submitAll' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></button>
-                <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
-                <a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter"><strong>Borrar todas las Compras</strong></a> 
+                <a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a> 
             </form>   
           </div>
         </div>
@@ -158,11 +163,13 @@
                         <br><button formaction="{% url 'partidaCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter container"><strong>Añadir Partida</strong></button>
 
                         <br><button formaction="{% url 'editCHK' %}" formmethod="get" type="submit" class="btn btn-secondary btn-primary letter container"><strong>Editar Compra Seleccionada</strong></button>
+                        
+                        <br><a href="{% url 'deleteAll' %}" class="btn btn-secondary btn-primary letter container"><strong>Borrar todas las Compras</strong></a>
                       </div>
 
                       <div class="table-responsive text-nowrap letter">
                         <table>
-                          {% csrf_token %}
+                                  {% csrf_token %}
                           <strong>{% render_table table %}</strong>
                         </table>
                       </div>
@@ -178,7 +185,6 @@
 {% block javascripts %}
 
 <script>
-
 $(function() {
   // Get references to the categoria and subcategoria fields
 	console.log("loaded")

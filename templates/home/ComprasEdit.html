@@ -2,7 +2,7 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %} {% block content %}
-
+{% load crispy_forms_tags %}
 <style>
     #excedenteimg {
       object-fit: contain;
@@ -88,48 +88,11 @@
 
 	<div role="main">
 		<div class="container-fluid mx-2">
-			<div id="custom-html-1n">
-				<div id="custom-html-1n"></div>
-
-				{% if submitted %}
-				<div
-					class="text-center mx-0 mx-sm-5 pt-2 mb-2"
-					style="margin-top: 6rem; margin-bottom: 4rem"
-				>
-					{% for message in messages %}
-					<h2
-						class="text-center"
-						style="
-							text-shadow: 1px 1px 30px #ffffff;
-							margin-top: 30px;
-							color: red;
-						"
-					>
-						{{message}}
-					</h2>
-					{% endfor %}
-				</div>
-
-				<div class="d-flex justify-content-center" style="margin-bottom: 10rem">
-					<a class="btn btn-success" href="/compras">
-						<i class="fa-solid fa-arrow-left fa-fw"></i>
-						&nbsp;Volver a Compras
-					</a>
-					<a class="btn btn-secondary" href="{% url 'addcompra' %}">
-						<i class="fa-solid fa-square-plus fa-fw"></i>
-						&nbsp;Crear Nueva Compra
-					</a>
-				</div>
-			</div>
-			{% else %} 
-				{% load crispy_forms_tags %}
+        {% csrf_token %}
 				{% crispy form %}
-
-				
-				
-			{% endif %}
 		</div>
 	</div>
 
-	{% endblock content %}
+	
 </div>
+{% endblock content %}

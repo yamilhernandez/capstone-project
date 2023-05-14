@@ -147,6 +147,11 @@ def partidaCHK(request):
     compra = Compra()
 
     if request.method == 'POST':
+        data =  request.POST
+        data._mutable = True
+        data['id_comprador'] = request.user
+        data['id_agencia'] = Agencia.objects.filter(oficial=request.user)[0]
+        data._mutable = False
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
@@ -159,6 +164,11 @@ def partidaCHK(request):
             messages.success(request, "Seleccione una compra para añadir partida")
             return redirect('/compras')
         else:
+            data =  request.POST
+            data._mutable = True
+            data['id_comprador'] = request.user
+            data['id_agencia'] = Agencia.objects.filter(oficial=request.user)[0]
+            data._mutable = False
             print(record_ids)
             compra = Compra.objects.get(id__in=record_ids)
             form = CompraForm(instance=compra)
@@ -175,10 +185,16 @@ def editCHK(request):
     if request.method == 'POST':
         record_ids = request.GET.getlist('selection')
         print(record_ids)
+        data =  request.POST
+        data._mutable = True
+        data['id_comprador'] = request.user
+        data['id_agencia'] = Agencia.objects.filter(oficial=request.user)[0]
+        data._mutable = False
         compra = Compra.objects.get(id__in=record_ids)
         form = CompraForm(request.POST, instance=compra)
         if form.is_valid():
             form.save()
+            print('saved!')
             messages.success(request, "Compra Editada!")
             return redirect('/compras')
 
@@ -189,7 +205,12 @@ def editCHK(request):
             return redirect('/compras')
         
         else:
-            print(record_ids)
+            data =  request.POST
+            data._mutable = True
+            data['id_comprador'] = request.user
+            data['id_agencia'] = Agencia.objects.filter(oficial=request.user)[0]
+            data._mutable = False
+            #print(record_ids)
             compra = Compra.objects.get(id__in=record_ids)
             form = CompraForm(instance=compra)
 

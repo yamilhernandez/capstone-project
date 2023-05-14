@@ -52,8 +52,13 @@ def sometidaView(request):
 #####################################Detailed View##########################################
 
 def ComprasDetails(request, num_reporte):
-    compras = CompraSometida.objects.filter(num_reporte=num_reporte).filter(id_comprador=request.user)
-    table = sometidaTable(compras)
+    
+    if request.user.is_superuser:
+        comprasometida = CompraSometida.objects.all().filter(num_reporte=num_reporte)
+    else:
+        comprasometida = CompraSometida.objects.filter(num_reporte=num_reporte).filter(id_comprador=request.user)
+
+    table = sometidaTable(comprasometida)
     table.paginate(page=request.GET.get("page", 1), per_page= 8)
     context = {'table': table}
     return render(request, 'home/sometidaFiltrada.html', context)

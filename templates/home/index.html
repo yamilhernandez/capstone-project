@@ -77,6 +77,10 @@
     flex: 0 0 66.666667%;
     max-width: 100%;
   }
+
+  .container{
+        text-align: center;
+    }
 </style>
 <div class="content">
   <div class="panel-header bg-primary-gradient">
@@ -96,33 +100,13 @@
       <div class="col-md-6">
         <div class="card full-height">
           <div class="card-body" style="overflow: scroll; height: 17rem">
-            <div class="card-title">Ultima Multa Recibida</div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Fecha Multa</th>
-                  <th scope="col"># Compra</th>
-                  <th scope="col"># Licitador</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2023-07-23</td>
-                  <td>0257</td>
-                  <td>4547</td>
-                </tr>
-                <tr>
-                  <td>2023-05-31</td>
-                  <td>0234</td>
-                  <td>1223</td>
-                </tr>
-                <tr>
-                  <td>2023-06-21</td>
-                  <td>8975</td>
-                  <td>6764</td>
-                </tr>
-              </tbody>
-            </table>
+            {% for x in agencias %}
+            <div class="card-title container">
+              <h1>Bienvenido</h1>
+              <br><h1>Su agencia asignada es: {{x.acronimo}}</h1>
+              <h3>{{x.nombre}}</h3>
+            {%endfor%}
+            </div>
           </div>
         </div>
       </div>
@@ -130,33 +114,15 @@
       <div class="col-md-6">
         <div class="card full-height">
           <div class="card-body" style="overflow: scroll; height: 15rem">
-            <div class="card-title">Ultima Compra Sometida</div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Fecha Reporte</th>
-                  <th scope="col"># Compra</th>
-                  <th scope="col"># Licitador</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2023-05-23</td>
-                  <td>0257</td>
-                  <td>4547</td>
-                </tr>
-                <tr>
-                  <td>2023-05-22</td>
-                  <td>0234</td>
-                  <td>1223</td>
-                </tr>
-                <tr>
-                  <td>2023-05-21</td>
-                  <td>8975</td>
-                  <td>6764</td>
-                </tr>
-              </tbody>
-            </table>
+            {% for user in usuario %}
+            <div class="card-title">Ultimo Reporte Sometido</div>
+                <div>
+                  <br><h3>Usuario: </h3>
+                  <h2>Nombre: {{user.nombre}}</h2>
+                  <h2>Rol: {{user.Rol}}</h2>
+                  <h2>Posicion: {{user.puesto}}</h2>
+                </div> 
+            {%endfor%}
           </div>
         </div>
       </div>
@@ -250,7 +216,7 @@
                   <div class="card-head-row card-tools-still-right">
                     <div class="card-body" style="overflow: scroll; height: 17rem">
                     <h4 class="card-title">Resumen del concepto</h4>
-                    {% for x in compras %}
+                    {% for x in comprasometida %}
                     <table class="table table-striped mt-3">
                       <thead>
                         <tr>

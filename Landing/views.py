@@ -21,12 +21,12 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/indice')
+            return redirect('/compras')
         else:
             return redirect('/indice')
 
     elif request.user.is_authenticated:
-        return redirect('/indice')
+        return redirect('/compras')
     else:
         return render(request, 'login.html')
 

@@ -21,7 +21,7 @@ class Agencia(models.Model):
     tipo = models.CharField(max_length=1000, default='', blank=False)
     fecha_inicio = models.DateField(blank=False)
     fecha_final = models.DateField(blank=False)
-    oficial = models.ManyToManyField(Usuario)
+    oficial = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     image_agencia = models.ImageField(upload_to='agencia', blank=False, null=False)
     alerta = models.BooleanField(null=True, blank=True)
 

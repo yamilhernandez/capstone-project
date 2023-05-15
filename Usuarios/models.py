@@ -19,7 +19,8 @@ class Usuario(AbstractUser):
     extension = models.CharField(max_length=60, blank=False)
     Rol = models.CharField(max_length=30, choices=tipo_ref,default=('', ''), blank=False)
     email = models.CharField(max_length=1000, default='', blank=False)
-
+    password = models.CharField(max_length=255, blank=False)
+    
     def save(self, *args, **kwargs):
         if self.Rol == 'Admin' or self.Rol == 'IT':
             self.is_staff = True

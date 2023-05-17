@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 from django.core.exceptions import ValidationError
 from Agencias.models import Agencia
+from django.utils import timezone
 
 from Usuarios.models import Usuario
 
@@ -11,7 +12,8 @@ from Usuarios.models import Usuario
 type_founds = (
 
     ('Estatal', 'Estatal'),
-    ('Federal', 'Federal')
+    ('Federal', 'Federal'),
+    ('Ingresos Propios', 'Ingresos Propios')
 )
 objectType=(
 ('1110','1110'),
@@ -858,9 +860,10 @@ class CompraSometida(models.Model):
     procedencia = models.CharField(max_length=1000,choices=procedenciaOptions,default=('',''),blank=False)
     proveedor = models.CharField(max_length=1000, blank=False)
     cuenta = models.CharField(max_length=255, blank=False)
-    fecha_reporte = models.DateField(blank=False)
+    fecha_reporte = models.DateField(default=timezone.now)
     fecha_recibo = models.DateField(blank=False)
-    num_reporte = models.CharField(max_length=500, blank=False, null=True)
+    #fecha_aprobacion = models.DateField(blank=False)
+    num_reporte = models.TextField(max_length=500, blank=False, null=True)
 
     def __str__(self):
         return self.num_compra

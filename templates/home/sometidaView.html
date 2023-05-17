@@ -172,28 +172,31 @@
             {% for num_reporte, comprasometida in compras_por_reporte.items %}
               <div class="card text-center bg-primary-gradient blanco">
                 <div class="card-header">
-                  <h2><strong>Sometido</strong></h2> 
+                  {% for x in comprasometida %}
+                    {% if forloop.counter == 1 %}
+                      <h2><strong>Reporte Sometido: {{x.fecha_reporte|date}}</strong></h2>
+                    {% endif %}
+                  {%endfor%} 
                 </div>
                 <div class="card-body">
                   <h5 class="card-title blanco"><strong>Reporte No. {{num_reporte}}</strong></h5>&nbsp;<br>
                   <a href="{% url 'ComprasDetails' num_reporte%}" class="btn btn-secondary btn-primary letter"><strong>Reporte Detallado</strong> </a>
                 </div>
               </div>
-
             {%endfor%} 
 
             {% for result in results %}
-            {% if forloop.counter == 1 %}
-              <div class="card text-center bg-primary-gradient blanco">
-                <div class="card-header">
-                  <h2><strong>Sometido</strong></h2> 
+              {% if forloop.counter == 1 %}
+                <div class="card text-center bg-primary-gradient blanco">
+                  <div class="card-header">
+                    <h2><strong>Reporte Sometido: {{result.fecha_reporte|date}}</strong></h2> 
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title blanco"><strong>Reporte No. {{result.num_reporte}}</strong></h5>&nbsp;<br>
+                    <a href="{% url 'ComprasDetails' result.num_reporte%}" class="btn btn-secondary btn-primary letter"><strong>Reporte Detallado</strong> </a>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title blanco"><strong>Reporte No. {{result.num_reporte}}</strong></h5>&nbsp;<br>
-                  <a href="{% url 'ComprasDetails' result.num_reporte%}" class="btn btn-secondary btn-primary letter"><strong>Reporte Detallado</strong> </a>
-                </div>
-              </div>
-            {% endif %}
+              {% endif %}
             {% endfor %}
             </div>    
         </div>

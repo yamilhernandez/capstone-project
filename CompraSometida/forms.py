@@ -13,9 +13,9 @@ class SometidaForm(ModelForm):
     class Meta:
         required_css_class = 'required'
         model = CompraSometida
-        fields = ['id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+        fields = ['id_agencia', 'metodo', 'objeto', 'fecha_recibo', 'num_licitador', 'fecha_reporte',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
-                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta', 'num_reporte']
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta', 'num_reporte'] #'fecha_reporte'
 
         labels = {
             'id_agencia': 'ID Agencia',
@@ -23,7 +23,7 @@ class SometidaForm(ModelForm):
             'objeto': 'Objeto',
             'num_licitador': '# Licitador:',
             'comentarios': 'Comentarios',
-            'fecha_reporte': 'Fecha de Reporte',
+            # 'fecha_reporte': 'Fecha de Reporte',
             'num_compra': 'Numero de Compra',
             'cantidad': 'Cantidad Total de Gastos $',
             'fondos': 'Fondos',
@@ -35,7 +35,8 @@ class SometidaForm(ModelForm):
             'cuenta': 'Cuenta',
             'comprador': 'Comprador',
             'fecha_recibo': 'Fecha Recibo',
-            'num_reporte': 'Numero Reporte'
+            'num_reporte': 'Numero Reporte',
+            'fecha_reporte': 'Fecha Reporte'
         }
         
         widgets = {
@@ -94,8 +95,11 @@ class SometidaForm(ModelForm):
             'fecha_recibo':
                 forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
 
-            'fecha_reporte':
-                forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
+             'fecha_reporte':
+                 forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
+
+            # 'fecha_aprobacion':
+            #     forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -119,7 +123,9 @@ class SometidaForm(ModelForm):
                     css_class='col-md-4'
                 ),
                 Div(
-                    'fecha_reporte','concepto', 'fecha_recibo', 'comprador','proveedor',
+                    'fecha_reporte',
+                    #'fecha_aprobacion',
+                    'concepto', 'fecha_recibo', 'comprador','proveedor',
                     'id_comprador',
                     css_class='col-md-4'
                 ),

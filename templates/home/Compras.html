@@ -88,6 +88,10 @@
         width: 100%;
     }
 
+    .blanco{
+      color: white;
+    }
+
   </style>
   <div class="content border">
     <div class="panel-header bg-primary-gradient">
@@ -101,9 +105,10 @@
           <div class="container">
             <form class="form-inline">
               {% csrf_token %}
-                &nbsp;<input required type="text" id="num_reporte" name="num_reporte" placeholder="Numero de Reporte" class="form-control mr-sm-2" aria-label="Numero de Reporte"><br>
+                &nbsp;<input required type="text" id="num_reporte" name="num_reporte" placeholder="#Reporte-Mes-Año" class="form-control mr-sm-2" aria-label="Numero de Reporte"><br>
                 &nbsp;<button formaction="{% url 'submitAll' %}" type="submit" formmethod="post" class="btn btn-secondary btn-primary letter"><strong>Someter Reporte</strong></button>
-                &nbsp;<a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a> 
+                &nbsp;<a href="{% url 'clearAll' %}" class="btn btn-secondary btn-primary letter"><strong>Reset</strong></a>
+                <br><h4 class="blanco" style="padding-right: 20rem;" ><strong>ADVERTENCIA: Una vez le de "Someter Reporte", no podrá enmendar el mismo.</strong></h4>
             </form>   
           </div>
         </div>

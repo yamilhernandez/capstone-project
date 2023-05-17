@@ -23,7 +23,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-k4vwk_hrj@2w9$p@cq*h=lex1i!=87opj0gzkyu#p$yg4hj-x7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 #true local
 #false Azure testing
 #ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
@@ -226,8 +226,8 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 
 ###################AZURE#####################################
 
-#DEFAULT_FILE_STORAGE = 'DEPO.az_config.AzureMediaStorage'
-#STATICFILES_STORAGE = 'DEPO.az_config.AzureStaticStorage'
+DEFAULT_FILE_STORAGE = 'DEPO.az_config.AzureMediaStorage'
+STATICFILES_STORAGE = 'DEPO.az_config.AzureStaticStorage'
 
 AZURE_STORAGE_KEY = os.environ.get('AZURE_STORAGE_KEY', False)
 AZURE_ACCOUNT_NAME = "depodevstorage"

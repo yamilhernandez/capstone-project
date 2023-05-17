@@ -16,9 +16,9 @@ class CompraForm(ModelForm):
     class Meta:
         required_css_class = 'required'
         model = Compra
-        fields = ['id_agencia', 'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+        fields = ['id_agencia', 'metodo', 'objeto', 'fecha_recibo', 'fecha_reporte','num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
-                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta'] #'fecha_reporte'
 
         labels = {
             'id_agencia': 'ID Agencia',
@@ -26,7 +26,7 @@ class CompraForm(ModelForm):
             'objeto': 'Objeto',
             'num_licitador': '# Licitador:',
             'comentarios': 'Comentarios',
-            'fecha_reporte': 'Fecha de Reporte',
+            #'fecha_reporte': 'Fecha de Reporte',
             'num_compra': 'Numero de Compra',
             'cantidad': 'Cantidad Total de Gastos $',
             'fondos': 'Fondos',
@@ -38,6 +38,7 @@ class CompraForm(ModelForm):
             'cuenta': 'Cuenta',
             'comprador': 'Comprador',
             'fecha_recibo': 'Fecha Recibo',
+            'fecha_reporte': 'Fecha Reporte'
         }
         
         widgets = {
@@ -93,8 +94,11 @@ class CompraForm(ModelForm):
             'fecha_recibo':
                 forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
 
-            'fecha_reporte':
-                forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
+             'fecha_reporte':
+                 forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
+
+            # 'fecha_aprobacion':
+            #     forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'De ser delegada mencione el tipo.','type': 'date', 'max': datetime.now().date()}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -119,7 +123,8 @@ class CompraForm(ModelForm):
                     css_class='col-md-4'
                 ),
                 Div(
-                    'fecha_reporte','concepto', 'fecha_recibo', 'comprador','proveedor',
+                    'fecha_reporte',
+                    'concepto', 'fecha_recibo', 'comprador','proveedor',
                     #'id_comprador',
                     css_class='col-md-4'
                 ),
@@ -142,8 +147,8 @@ class SimpleTable(tables.Table):
     
     class Meta:
         model = Compra
-        fields = ['selection','id_agencia' ,'metodo', 'objeto', 'fecha_reporte', 'fecha_recibo', 'num_licitador',
+        fields = ['selection','id_agencia' ,'metodo', 'objeto', 'fecha_recibo', 'fecha_reporte', 'num_licitador',
                   'comentarios', 'comprador', 'num_compra', 'concepto', 'cantidad', 'fondos', 'descripcion', 
-                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta']
+                  'id_comprador', 'asignacion', 'procedencia', 'proveedor', 'cuenta'] # 'fecha_reporte'
         orderable = False
         attrs = {"class": "table table-sm table-striped"}
